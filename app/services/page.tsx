@@ -54,7 +54,7 @@ export default function ServicesPage() {
                   <p className="mt-4 max-w-sm text-sm leading-relaxed text-ink/60">
                     {service.description}
                   </p>
-                  <div className="mt-6 flex flex-wrap gap-x-5 gap-y-2">
+                  <div className="mt-8 flex flex-wrap gap-x-4 gap-y-2">
                     {service.tags.map((tag) => (
                       <Tag key={tag} tone={tones[i]} variant="dot">
                         {tag}

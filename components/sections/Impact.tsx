@@ -10,7 +10,7 @@ export default function Impact() {
   return (
     <section
       id="by-the-numbers"
-      className="relative overflow-hidden bg-dark px-6 py-24 text-dark-ink sm:px-8 lg:px-12 lg:py-36"
+      className="relative overflow-hidden bg-dark px-6 pt-6 pb-12 text-dark-ink sm:px-8 lg:px-12 lg:pt-8 lg:pb-16"
     >
       <div
         aria-hidden
@@ -27,7 +27,7 @@ export default function Impact() {
           eyebrow="By the numbers"
           title="Results, not vibes."
           dark
-          className="mb-16"
+          className="mb-8"
         />
 
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -41,7 +41,7 @@ export default function Impact() {
               >
                 <Counter value={stat.value} suffix={stat.suffix} />
               </p>
-              <p className="mt-3 text-sm text-dark-ink/60">{stat.label}</p>
+              <p className="mt-4 text-sm text-dark-ink/60">{stat.label}</p>
             </Reveal>
           ))}
         </div>

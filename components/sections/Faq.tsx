@@ -11,11 +11,11 @@ export default function Faq() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section id="questions" className="gradient-mesh relative overflow-hidden px-6 py-24 sm:px-8 lg:px-12 lg:py-36">
+    <section id="questions" className="gradient-mesh relative overflow-hidden px-6 py-12 sm:px-8 lg:px-12 lg:py-16">
       <div className="mx-auto max-w-[1440px]">
-        <SectionHeading index="08" eyebrow="Questions" title="Everything you're probably wondering." className="mb-16" />
+        <SectionHeading index="08" eyebrow="Questions" title="Everything you're probably wondering." className="mb-8" />
 
-        <div className="mx-auto flex max-w-3xl flex-col gap-3">
+        <div className="mx-auto flex max-w-3xl flex-col gap-4">
           {faq.map((item, i) => {
             const isOpen = openIndex === i;
             return (

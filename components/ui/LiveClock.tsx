@@ -3,7 +3,13 @@
 import { useLiveClock } from "@/lib/hooks/useLiveClock";
 import { cn } from "@/lib/utils";
 
-export default function LiveClock({ className }: { className?: string }) {
+export default function LiveClock({
+  className,
+  showLocation = true,
+}: {
+  className?: string;
+  showLocation?: boolean;
+}) {
   const time = useLiveClock();
 
   return (
@@ -18,7 +24,7 @@ export default function LiveClock({ className }: { className?: string }) {
         className="h-1.5 w-1.5 rounded-full bg-accent motion-safe:animate-pulse"
       />
       <span>
-        Based in Istanbul ·{" "}
+        {showLocation && "Based in Istanbul · "}
         <span className="tabular-nums font-display">
           {time ?? "00:00:00"}
         </span>

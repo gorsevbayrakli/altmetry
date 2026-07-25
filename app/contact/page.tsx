@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Reveal from "@/components/ui/Reveal";
-import LiveClock from "@/components/ui/LiveClock";
 import ContactForm from "@/components/contact/ContactForm";
 
 export const metadata: Metadata = {
@@ -41,7 +40,6 @@ export default function ContactPage() {
                 hello@altmetry.com
               </a>
               <p className="text-ink/60">Istanbul, Türkiye · Remote-friendly</p>
-              <LiveClock />
             </div>
 
             <div className="mt-10 flex gap-4 border-t border-ink/10 pt-8">

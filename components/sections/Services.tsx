@@ -7,7 +7,6 @@ import { services } from "@/lib/data/services";
 import { cn } from "@/lib/utils";
 
 const tones: TagTone[] = ["accent", "accent-2", "accent-3"];
-const numberClasses = ["text-accent", "text-accent-2", "text-accent-3"];
 const titleHoverClasses = [
   "group-hover:text-accent",
   "group-hover:text-accent-2",
@@ -16,14 +15,14 @@ const titleHoverClasses = [
 
 export default function Services() {
   return (
-    <section id="what-we-do" className="px-6 py-24 sm:px-8 lg:px-12 lg:py-36">
+    <section id="what-we-do" className="px-6 py-12 sm:px-8 lg:px-12 lg:py-16">
       <div className="mx-auto max-w-[1440px]">
         <SectionHeading
           index="02"
           eyebrow="What we do"
           title={"Three disciplines.\nOne accountable team."}
           description="Design, development, and consulting run in parallel here, not in sequence — so nothing gets designed that can't be built, and nothing gets built without a strategic reason."
-          className="mb-16 whitespace-pre-line"
+          className="mb-8 whitespace-pre-line"
         />
 
         <div className="flex flex-col divide-y divide-ink/10 border-t border-ink/10">
@@ -33,18 +32,7 @@ export default function Services() {
                 href={`/services#${service.slug}`}
                 className="group grid grid-cols-1 gap-8 py-10 md:grid-cols-12 md:items-center md:gap-6"
               >
-                <div className="md:col-span-1">
-                  <span
-                    className={cn(
-                      "font-display text-sm font-medium tabular-nums",
-                      numberClasses[i]
-                    )}
-                  >
-                    {service.number}
-                  </span>
-                </div>
-
-                <div className="md:col-span-4">
+                <div className="md:col-span-5">
                   <h3
                     className={cn(
                       "font-display text-3xl font-medium tracking-tight text-ink transition-colors sm:text-4xl",
@@ -53,13 +41,13 @@ export default function Services() {
                   >
                     {service.name}
                   </h3>
-                  <p className="mt-3 max-w-sm text-sm leading-relaxed text-ink/60">
+                  <p className="mt-4 max-w-sm text-sm leading-relaxed text-ink/60">
                     {service.description}
                   </p>
                 </div>
 
                 <div className="md:col-span-4">
-                  <div className="flex flex-wrap gap-x-5 gap-y-2">
+                  <div className="flex flex-wrap gap-x-4 gap-y-2">
                     {service.tags.map((tag) => (
                       <Tag key={tag} tone={tones[i]} variant="dot">
                         {tag}

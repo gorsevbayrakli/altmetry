@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import LiveClock from "@/components/ui/LiveClock";
 import MagneticButton from "@/components/ui/MagneticButton";
 import { cn } from "@/lib/utils";
 
@@ -38,7 +37,7 @@ export default function Header() {
           : "bg-transparent"
       )}
     >
-      <div className="mx-auto flex max-w-[1440px] items-center justify-between px-6 py-5 sm:px-8 lg:px-12">
+      <div className="mx-auto flex max-w-[1440px] items-center justify-between px-6 py-6 sm:px-8 lg:px-12">
         <Link href="/" className="flex items-center" aria-label="Altmetry — home">
           <Image
             src="/logo-light.png"
@@ -63,7 +62,6 @@ export default function Header() {
         </nav>
 
         <div className="hidden items-center gap-6 lg:flex">
-          <LiveClock />
           <MagneticButton href="/contact">Start a project</MagneticButton>
         </div>
 
@@ -86,19 +84,18 @@ export default function Header() {
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
             className="overflow-hidden border-t border-ink/10 bg-canvas md:hidden"
           >
-            <div className="flex flex-col gap-1 px-6 py-6">
+            <div className="flex flex-col gap-2 px-6 py-6">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
                   onClick={() => setMenuOpen(false)}
-                  className="py-3 text-lg text-ink/80 transition-colors hover:text-ink"
+                  className="py-4 text-lg text-ink/80 transition-colors hover:text-ink"
                 >
                   {link.label}
                 </Link>
               ))}
               <div className="mt-4 flex items-center justify-between">
-                <LiveClock />
                 <MagneticButton href="/contact">Start a project</MagneticButton>
               </div>
             </div>

@@ -3,7 +3,7 @@ import MagneticButton from "@/components/ui/MagneticButton";
 
 export default function FinalCta() {
   return (
-    <section className="bg-dark px-6 py-24 text-dark-ink sm:px-8 lg:px-12 lg:py-40">
+    <section className="bg-dark px-6 py-14 text-dark-ink sm:px-8 lg:px-12 lg:py-20">
       <div className="mx-auto max-w-[1440px] text-center">
         <Reveal>
           <h2 className="font-display text-4xl font-medium leading-[1.05] tracking-tight sm:text-6xl md:text-7xl">

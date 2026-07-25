@@ -6,9 +6,9 @@ import { journalPosts } from "@/lib/data/journalPosts";
 
 export default function JournalTeaser() {
   return (
-    <section className="px-6 py-24 sm:px-8 lg:px-12 lg:py-36">
+    <section className="px-6 py-12 sm:px-8 lg:px-12 lg:py-16">
       <div className="mx-auto max-w-[1440px]">
-        <div className="mb-16 flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
+        <div className="mb-8 flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
           <Reveal>
             <p className="mb-4 text-sm uppercase tracking-wide text-ink/50">
               Journal

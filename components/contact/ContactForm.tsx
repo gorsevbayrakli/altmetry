@@ -43,7 +43,7 @@ function Field({
 }
 
 const inputClasses =
-  "w-full border-b border-ink/20 bg-transparent py-3 text-base text-ink outline-none transition-colors focus:border-accent placeholder:text-ink/30";
+  "w-full border-b border-ink/20 bg-transparent py-4 text-base text-ink outline-none transition-colors focus:border-accent placeholder:text-ink/30";
 
 export default function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
@@ -167,7 +167,7 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={status === "submitting"}
-        className="w-fit rounded-full bg-ink px-6 py-3 text-sm font-medium text-canvas transition-colors hover:bg-accent disabled:opacity-50"
+        className="w-fit rounded-full bg-ink px-6 py-4 text-sm font-medium text-canvas transition-colors hover:bg-accent disabled:opacity-50"
       >
         {status === "submitting" ? "Sending…" : "Send inquiry"}
       </button>

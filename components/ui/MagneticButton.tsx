@@ -46,7 +46,7 @@ export default function MagneticButton({
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
         className={cn(
-          "group relative inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium tracking-tight transition-colors",
+          "group relative inline-flex items-center gap-2 rounded-full px-6 py-4 text-sm font-medium tracking-tight transition-colors",
           variant === "solid" &&
             "bg-ink text-canvas hover:bg-accent hover:text-canvas",
           variant === "outline" &&

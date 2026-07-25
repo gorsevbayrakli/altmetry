@@ -31,7 +31,7 @@ function FilterRow({
       <button
         onClick={() => onSelect(null)}
         className={cn(
-          "rounded-full border px-3 py-1 text-xs transition-colors",
+          "rounded-full border px-4 py-2 text-xs transition-colors",
           active === null
             ? "border-accent bg-accent/10 text-accent"
             : "border-ink/15 text-ink/60 hover:border-ink/40"
@@ -44,7 +44,7 @@ function FilterRow({
           key={opt}
           onClick={() => onSelect(opt)}
           className={cn(
-            "rounded-full border px-3 py-1 text-xs transition-colors",
+            "rounded-full border px-4 py-2 text-xs transition-colors",
             active === opt
               ? "border-accent bg-accent/10 text-accent"
               : "border-ink/15 text-ink/60 hover:border-ink/40"

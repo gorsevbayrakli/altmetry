@@ -22,7 +22,7 @@ export default function SectionHeading({
     <Reveal className={cn("max-w-3xl", className)}>
       <div
         className={cn(
-          "mb-4 flex items-center gap-3 font-display text-sm tabular-nums tracking-wide",
+          "mb-4 flex items-center gap-4 font-display text-sm tabular-nums tracking-wide",
           dark ? "text-dark-ink/50" : "text-ink/50"
         )}
       >
@@ -41,7 +41,7 @@ export default function SectionHeading({
       {description && (
         <p
           className={cn(
-            "mt-5 max-w-xl text-base leading-relaxed sm:text-lg",
+            "mt-4 max-w-xl text-base leading-relaxed sm:text-lg",
             dark ? "text-dark-ink/70" : "text-ink/70"
           )}
         >

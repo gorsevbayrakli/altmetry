@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 
 function Stars({ rating }: { rating: number }) {
   return (
-    <div className="flex gap-1 text-accent" aria-label={`${rating} out of 5 stars`}>
+    <div className="flex gap-2 text-accent" aria-label={`${rating} out of 5 stars`}>
       {Array.from({ length: 5 }).map((_, i) => (
         <svg
           key={i}
@@ -35,9 +35,9 @@ export default function Testimonials() {
   }
 
   return (
-    <section id="words" className="gradient-mesh relative overflow-hidden px-6 py-24 sm:px-8 lg:px-12 lg:py-36">
+    <section id="words" className="gradient-mesh relative overflow-hidden px-6 py-12 sm:px-8 lg:px-12 lg:py-16">
       <div className="mx-auto max-w-[1440px]">
-        <SectionHeading index="07" eyebrow="Words" title="From the people we've built with." className="mb-16" />
+        <SectionHeading index="07" eyebrow="Words" title="From the people we've built with." className="mb-8" />
 
         <div className="glass mx-auto max-w-2xl rounded-3xl p-8 sm:p-10">
           <AnimatePresence mode="wait">
@@ -75,19 +75,6 @@ export default function Testimonials() {
             >
               →
             </button>
-            <div className="flex gap-2 pl-2">
-              {testimonials.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setIndex(i)}
-                  aria-label={`Go to testimonial ${i + 1}`}
-                  className={cn(
-                    "h-1.5 rounded-full transition-all",
-                    i === index ? "w-6 bg-accent" : "w-1.5 bg-ink/20"
-                  )}
-                />
-              ))}
-            </div>
           </div>
         </div>
       </div>

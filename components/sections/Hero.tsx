@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import MagneticButton from "@/components/ui/MagneticButton";
-import LiveClock from "@/components/ui/LiveClock";
 
 const lines = ["We build the", "systems behind", "brands that perform."];
 
@@ -35,7 +34,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="mb-6 flex items-center gap-3 text-sm uppercase tracking-wide text-ink/50"
+          className="mb-6 flex items-center gap-4 text-sm uppercase tracking-wide text-ink/50"
         >
           <span className="font-display tabular-nums">01</span>
           <span className="h-px w-8 bg-ink/30" />
@@ -97,7 +96,6 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.6 }}
           className="mt-16"
         >
-          <LiveClock />
         </motion.div>
       </div>
 

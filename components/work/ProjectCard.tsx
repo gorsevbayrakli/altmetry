@@ -27,7 +27,7 @@ export default function ProjectCard({ project }: { project: Project }) {
           {project.discipline.map((d) => (
             <Tag
               key={d}
-              className="gap-1.5 border-canvas/30 bg-dark/70 text-canvas backdrop-blur-sm"
+              className="gap-2 border-canvas/30 bg-dark/70 text-canvas backdrop-blur-sm"
             >
               <span
                 aria-hidden
@@ -38,12 +38,12 @@ export default function ProjectCard({ project }: { project: Project }) {
           ))}
         </div>
       </div>
-      <div className="mt-5 flex items-start justify-between gap-4">
+      <div className="mt-4 flex items-start justify-between gap-4">
         <div>
           <p className="font-display text-lg font-medium tracking-tight text-ink group-hover:text-accent transition-colors">
             {project.client}
           </p>
-          <p className="mt-1 text-sm text-ink/60">{project.summary}</p>
+          <p className="mt-2 text-sm text-ink/60">{project.summary}</p>
         </div>
         <span className="shrink-0 font-display text-sm tabular-nums text-ink/40">
           {project.year}

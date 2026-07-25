@@ -15,7 +15,7 @@ export default function SectionIndexRail() {
   return (
     <nav
       aria-label="Section navigation"
-      className="fixed right-6 top-1/2 z-40 hidden -translate-y-1/2 flex-col items-end gap-3 lg:flex"
+      className="fixed right-6 top-1/2 z-40 hidden -translate-y-1/2 flex-col items-end gap-4 lg:flex"
     >
       {homeSections.map((section) => {
         const isActive = section.id === activeId;
@@ -23,7 +23,7 @@ export default function SectionIndexRail() {
           <button
             key={section.id}
             onClick={() => handleClick(section.id)}
-            className="group flex items-center gap-3"
+            className="group flex items-center gap-4"
             aria-current={isActive ? "true" : undefined}
           >
             <span

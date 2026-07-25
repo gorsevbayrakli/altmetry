@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import LiveClock from "@/components/ui/LiveClock";
 
 const sitemap = [
   { href: "/work", label: "Work" },
@@ -39,7 +38,7 @@ export default function Footer() {
               Altmetry is a design, development, and consulting studio —
               built to measure.
             </p>
-            <div className="mt-8 flex flex-col gap-3 text-sm text-dark-ink/70">
+            <div className="mt-8 flex flex-col gap-4 text-sm text-dark-ink/70">
               <a
                 href="mailto:hello@altmetry.com"
                 className="w-fit text-dark-ink transition-colors hover:text-accent"
@@ -47,7 +46,6 @@ export default function Footer() {
                 hello@altmetry.com
               </a>
               <p>Istanbul, Türkiye · Remote-friendly</p>
-              <LiveClock className="text-dark-ink/50" />
             </div>
           </div>
 
@@ -56,7 +54,7 @@ export default function Footer() {
               <p className="mb-4 text-xs uppercase tracking-wide text-dark-ink/40">
                 Sitemap
               </p>
-              <ul className="flex flex-col gap-3">
+              <ul className="flex flex-col gap-4">
                 {sitemap.map((item) => (
                   <li key={item.href}>
                     <Link
@@ -74,7 +72,7 @@ export default function Footer() {
               <p className="mb-4 text-xs uppercase tracking-wide text-dark-ink/40">
                 Social
               </p>
-              <ul className="flex flex-col gap-3">
+              <ul className="flex flex-col gap-4">
                 {social.map((item) => (
                   <li key={item.href}>
                     <a
@@ -94,7 +92,7 @@ export default function Footer() {
               <p className="mb-4 text-xs uppercase tracking-wide text-dark-ink/40">
                 Legal
               </p>
-              <ul className="flex flex-col gap-3">
+              <ul className="flex flex-col gap-4">
                 {legal.map((item) => (
                   <li key={item.href}>
                     <Link

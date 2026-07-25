@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Reveal from "@/components/ui/Reveal";
-import LiveClock from "@/components/ui/LiveClock";
 import MagneticButton from "@/components/ui/MagneticButton";
 import { founder, team } from "@/lib/data/team";
 
@@ -134,7 +133,6 @@ export default function StudioPage() {
               Istanbul, Türkiye — remote-friendly worldwide.
             </p>
             <div className="mt-4">
-              <LiveClock />
             </div>
           </div>
           <MagneticButton href="/contact">Start a project</MagneticButton>

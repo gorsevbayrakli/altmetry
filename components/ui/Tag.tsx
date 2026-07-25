@@ -41,7 +41,7 @@ export default function Tag({
   return (
     <span
       className={cn(
-        "inline-flex items-center rounded-full border px-3 py-1 text-xs tracking-wide",
+        "inline-flex items-center rounded-full border px-4 py-2 text-xs tracking-wide",
         active ? toneClasses.accent : toneClasses[tone],
         className
       )}

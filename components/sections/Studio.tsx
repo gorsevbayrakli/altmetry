@@ -5,14 +5,14 @@ import { founder } from "@/lib/data/team";
 
 export default function Studio() {
   return (
-    <section id="studio" className="gradient-mesh relative overflow-hidden px-6 py-24 sm:px-8 lg:px-12 lg:py-36">
+    <section id="studio" className="gradient-mesh relative overflow-hidden px-6 py-12 sm:px-8 lg:px-12 lg:py-16">
       <div className="mx-auto max-w-[1440px]">
         <SectionHeading
           index="06"
           eyebrow="Who's behind it"
           title="Surface and system."
           description="Anyone can design a nice-looking page. What holds a brand together over years is the operating logic underneath it — the part clients don't see, but always feel."
-          className="mb-16"
+          className="mb-8"
         />
 
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-8">
@@ -44,7 +44,7 @@ export default function Studio() {
                 href={founder.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-4 inline-flex items-center gap-1 text-sm text-accent underline-offset-4 hover:underline"
+                className="mt-4 inline-flex items-center gap-2 text-sm text-accent underline-offset-4 hover:underline"
               >
                 Connect on LinkedIn →
               </a>

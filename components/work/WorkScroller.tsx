@@ -25,14 +25,30 @@ export default function WorkScroller({ projects }: { projects: Project[] }) {
       }
     }
 
+    // Lenis intercepts wheel events globally for smooth page scroll; pause it
+    // while hovering so it can't fight the horizontal redirect above.
+    function onEnter() {
+      window.__lenis?.stop();
+    }
+    function onLeave() {
+      window.__lenis?.start();
+    }
+
     el.addEventListener("wheel", onWheel, { passive: false });
-    return () => el.removeEventListener("wheel", onWheel);
+    el.addEventListener("mouseenter", onEnter);
+    el.addEventListener("mouseleave", onLeave);
+    return () => {
+      el.removeEventListener("wheel", onWheel);
+      el.removeEventListener("mouseenter", onEnter);
+      el.removeEventListener("mouseleave", onLeave);
+      window.__lenis?.start();
+    };
   }, []);
 
   return (
     <div
       ref={scrollerRef}
-      className="no-scrollbar -mx-6 flex snap-x snap-mandatory gap-8 overflow-x-auto px-6 pb-4 sm:-mx-8 sm:px-8 lg:-mx-12 lg:px-12"
+      className="no-scrollbar -mx-6 flex snap-x snap-proximity gap-8 overflow-x-auto px-6 pb-4 sm:-mx-8 sm:px-8 lg:-mx-12 lg:px-12"
     >
       {projects.map((project) => (
         <div key={project.slug} className="w-[78vw] shrink-0 snap-start sm:w-[420px]">

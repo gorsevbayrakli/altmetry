@@ -48,10 +48,10 @@ export default function WorkScroller({ projects }: { projects: Project[] }) {
   return (
     <div
       ref={scrollerRef}
-      className="no-scrollbar -mx-6 flex snap-x snap-proximity gap-8 overflow-x-auto px-6 pb-4 sm:-mx-8 sm:px-8 lg:-mx-12 lg:px-12"
+      className="no-scrollbar -mx-6 flex gap-8 overflow-x-auto px-6 pb-4 sm:-mx-8 sm:px-8 lg:-mx-12 lg:px-12"
     >
       {projects.map((project) => (
-        <div key={project.slug} className="w-[78vw] shrink-0 snap-start sm:w-[420px]">
+        <div key={project.slug} className="w-[78vw] shrink-0 sm:w-[420px]">
           <ProjectCard project={project} />
         </div>
       ))}

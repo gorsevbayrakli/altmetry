@@ -1,14 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import Tag from "@/components/ui/Tag";
 import type { Project } from "@/lib/data/projects";
-import { cn } from "@/lib/utils";
-
-const disciplineDot: Record<string, string> = {
-  Design: "bg-accent",
-  Development: "bg-accent-2",
-  Consulting: "bg-accent-3",
-};
 
 export default function ProjectCard({ project }: { project: Project }) {
   return (
@@ -23,20 +15,6 @@ export default function ProjectCard({ project }: { project: Project }) {
           placeholder="blur"
           blurDataURL="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjMiPjxyZWN0IHdpZHRoPSI0IiBoZWlnaHQ9IjMiIGZpbGw9IiNlOGU1ZGQiLz48L3N2Zz4="
         />
-        <div className="absolute left-4 top-4 flex gap-2">
-          {project.discipline.map((d) => (
-            <Tag
-              key={d}
-              className="gap-2 border-canvas/30 bg-dark/70 text-canvas backdrop-blur-sm"
-            >
-              <span
-                aria-hidden
-                className={cn("h-1.5 w-1.5 rounded-full", disciplineDot[d])}
-              />
-              {d}
-            </Tag>
-          ))}
-        </div>
       </div>
       <div className="mt-4 flex items-start justify-between gap-4">
         <div>

@@ -11,35 +11,36 @@ export default function WorkScroller({ projects }: { projects: Project[] }) {
     const el = scrollerRef.current;
     if (!el) return;
 
+    // Lenis intercepts wheel events globally for smooth page scroll. mouseenter
+    // doesn't fire when this row scrolls under an already-stationary cursor
+    // (the normal case while scrolling down the page), so pausing Lenis can't
+    // depend on hover-enter timing — it has to be decided per wheel event.
     function onWheel(e: WheelEvent) {
       if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return;
 
       const atStart = el!.scrollLeft <= 0;
       const atEnd = el!.scrollLeft >= el!.scrollWidth - el!.clientWidth - 1;
       const scrollingDown = e.deltaY > 0;
+      const shouldRedirect = (scrollingDown && !atEnd) || (!scrollingDown && !atStart);
 
-      if ((scrollingDown && !atEnd) || (!scrollingDown && !atStart)) {
+      if (shouldRedirect) {
+        window.__lenis?.stop();
         e.preventDefault();
         e.stopPropagation();
         el!.scrollLeft += e.deltaY;
+      } else {
+        window.__lenis?.start();
       }
     }
 
-    // Lenis intercepts wheel events globally for smooth page scroll; pause it
-    // while hovering so it can't fight the horizontal redirect above.
-    function onEnter() {
-      window.__lenis?.stop();
-    }
     function onLeave() {
       window.__lenis?.start();
     }
 
     el.addEventListener("wheel", onWheel, { passive: false });
-    el.addEventListener("mouseenter", onEnter);
     el.addEventListener("mouseleave", onLeave);
     return () => {
       el.removeEventListener("wheel", onWheel);
-      el.removeEventListener("mouseenter", onEnter);
       el.removeEventListener("mouseleave", onLeave);
       window.__lenis?.start();
     };

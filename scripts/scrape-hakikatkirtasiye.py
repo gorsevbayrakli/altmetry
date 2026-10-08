@@ -3,7 +3,7 @@
 
 Sources:
   1. /sitemap.xml index -> product, image, category, brand, static, tag sitemaps
-  2. Top-level category listing pages (?page=N) -> name, brand, price, image, id
+  2. Top-level category listing pages (?tp=N) -> name, brand, price, image, id
 
 Output (in OUT_DIR):
   products.csv / products.json   merged product records
@@ -167,7 +167,7 @@ def listing_stage(products):
         page_no = 1
         seen = set()
         while True:
-            page = fetch(f"{BASE}/kategori/{cat}?page={page_no}")
+            page = fetch(f"{BASE}/kategori/{cat}?tp={page_no}")
             # out-of-range pages return page 1 again, so stop once nothing new shows up
             cards = [c for c in parse_listing(page, cat) if c["url"] not in seen]
             seen.update(c["url"] for c in cards)

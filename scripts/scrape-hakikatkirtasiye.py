@@ -112,6 +112,20 @@ def parse_listing(page, category):
 
 def main():
     os.makedirs(OUT_DIR, exist_ok=True)
+    cache = os.path.join(OUT_DIR, ".sitemap-cache.json")
+    if os.path.exists(cache):
+        with open(cache, encoding="utf-8") as f:
+            products = json.load(f)
+        print(f"loaded {len(products)} urls from cache", flush=True)
+    else:
+        products = sitemap_stage()
+        with open(cache, "w", encoding="utf-8") as f:
+            json.dump(products, f, ensure_ascii=False)
+    listing_stage(products)
+    os.remove(cache)
+
+
+def sitemap_stage():
     groups = sitemaps()
     print({k: len(v) for k, v in groups.items()}, flush=True)
 
@@ -145,12 +159,18 @@ def main():
         w = csv.writer(f)
         w.writerow(["type", "url"])
         w.writerows(pages)
+    return products
 
+
+def listing_stage(products):
     for cat in TOP_CATEGORIES:
         page_no = 1
+        seen = set()
         while True:
             page = fetch(f"{BASE}/kategori/{cat}?page={page_no}")
-            cards = parse_listing(page, cat)
+            # out-of-range pages return page 1 again, so stop once nothing new shows up
+            cards = [c for c in parse_listing(page, cat) if c["url"] not in seen]
+            seen.update(c["url"] for c in cards)
             for c in cards:
                 p = products.setdefault(c["url"], {"url": c["url"], "lastmod": "", "images": []})
                 cats = p.get("categories", [])

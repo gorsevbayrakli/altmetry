@@ -5,43 +5,43 @@ export interface FaqItem {
 
 export const faq: FaqItem[] = [
   {
-    question: "What does an engagement with Altmetry actually look like?",
+    question: "Şirketimiz küçük. Yapay zekâ bize göre mi?",
     answer:
-      "Most engagements start with a scoped discovery sprint — one to two weeks — that ends in a clear brief and estimate. From there we work in fixed-scope phases (strategy, design, build) or as an embedded team on a monthly retainer, depending on what the work needs.",
+      "Küçük ekiplerde etki daha hızlı görünür, çünkü bir kişinin haftada kazandığı 5 saat tüm ekibe yansır. Başlamak için büyük bir bütçe ya da veri ekibi gerekmez.",
   },
   {
-    question: "How long do projects typically take?",
+    question: "Teknik ekibimiz yok. Sorun olur mu?",
     answer:
-      "A focused brand or marketing site runs 6–10 weeks. A full product build with design systems and custom development is usually 3–6 months. Consulting engagements (positioning, GTM strategy) run 3–5 weeks and often set the brief for a build that follows.",
+      "Olmaz. Kurulumu biz yapıyoruz, ekibinizi araçları tek başına kullanacak kadar eğitiyoruz. Gerekirse yarı zamanlı teknoloji liderliğini de üstleniyoruz.",
   },
   {
-    question: "How do design, development, and consulting actually combine on one project?",
+    question: "Verilerimiz güvende mi?",
     answer:
-      "One team, one calendar. A consulting sprint sets the strategic brief, design and development build against it in parallel rather than in a design-then-build handoff, and the same senior team stays on from kickoff to launch — no re-briefing a second vendor.",
+      "Hangi verinin hangi araca gideceğini ve hangisinin şirket dışına çıkmayacağını işe başlamadan yazılı olarak belirliyoruz. KVKK'ya uygun kurgu temel şartımız.",
   },
   {
-    question: "How is pricing structured?",
+    question: "Ne kadar sürede sonuç görürüz?",
     answer:
-      "Fixed-scope phases are quoted as flat project fees based on the brief from discovery. Ongoing work — growth advisory, iterative design, or embedded development — runs as a monthly retainer. We'll always tell you which model fits before you commit to either.",
+      "Teşhis 1 hafta, ilk pilot 4–6 hafta sürer. Pilotun sonunda, başta belirlediğimiz ölçüyle karşılaştırılmış bir sonucunuz olur.",
   },
   {
-    question: "What happens after launch?",
+    question: "Hangi araçları kullanıyorsunuz?",
     answer:
-      "Every project ships with a 30-day warranty period for fixes. Beyond that, most clients move to a lighter monthly retainer for iteration, monitoring, and small feature work, or bring work back to us on an as-needed basis.",
+      "Belirli bir araca bağlı değiliz. Önce mevcut sistemlerinizi kullanıyoruz: ERP, CRM, e-posta, ortak klasörler. Yeni araç ancak gerçekten gerekiyorsa gelir.",
   },
   {
-    question: "What industries have you worked in?",
+    question: "Ekibim işini kaybeder mi?",
     answer:
-      "Healthcare, logistics, finance, retail, outdoor and recreation, robotics and manufacturing, food and beverage, and architecture, among others. The common thread isn't the industry — it's founder-led or scaling teams that need design, build, and strategy to move together.",
+      "Amacımız insanları tekrar eden işten kurtarıp müşteriye, satışa ve karar vermeye ayırdıkları zamanı artırmak. Önceki deneyimimizde gördüğümüz verimlilik artışı ekibi küçültmeden, aynı ekiple daha fazla iş yapılarak geldi.",
   },
   {
-    question: "Do you work with early-stage companies, or only established ones?",
+    question: "Fiyatlandırma nasıl?",
     answer:
-      "Both. Early-stage teams tend to lean on our consulting and design work to get positioning and a launch-ready product out fast. Later-stage teams more often bring us in for a rebuild, a rebrand tied to a raise, or an embedded development retainer.",
+      "Teşhis ve pilot sabit fiyatlıdır. AI Ortaklığı aylık ücretlidir. Ön görüşmeden sonra size hangi modelin uyduğunu söylüyoruz.",
   },
   {
-    question: "Can we start with just one discipline and add the others later?",
+    question: "İki kişilik bir ekiple nasıl çalışıyorsunuz?",
     answer:
-      "Yes. Plenty of clients start with a single engagement — a rebrand, a site rebuild, a positioning sprint — and expand once they've seen how the team works. Nothing requires buying into all three disciplines up front.",
+      "Kurucular her projede doğrudan çalışır. Gerektiğinde güvendiğimiz uzmanlardan oluşan bir ağ devreye girer. Kimin çalışacağını baştan söyleriz.",
   },
 ];

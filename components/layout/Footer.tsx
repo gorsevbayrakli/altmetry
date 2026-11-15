@@ -1,117 +1,53 @@
-import Image from "next/image";
 import Link from "next/link";
+import { Logo } from "@/components/brand/Logo";
 
 const sitemap = [
-  { href: "/work", label: "Work" },
-  { href: "/services", label: "Services" },
-  { href: "/studio", label: "Studio" },
-  { href: "/journal", label: "Journal" },
-  { href: "/contact", label: "Contact" },
+  { href: "/services", label: "Hizmetler" },
+  { href: "/work", label: "Örnek senaryolar" },
+  { href: "/studio", label: "Hakkımızda" },
+  { href: "/journal", label: "Yazılar" },
+  { href: "/contact", label: "İletişim" },
 ];
 
-const social = [
-  { href: "https://instagram.com", label: "Instagram" },
-  { href: "https://linkedin.com", label: "LinkedIn" },
-  { href: "https://dribbble.com", label: "Dribbble" },
-  { href: "https://behance.net", label: "Behance" },
-];
+// Şirketin LinkedIn ve Instagram profilleri açılınca doldurulacak.
+export const social: { href: string; label: string }[] = [];
 
 const legal = [
-  { href: "/privacy", label: "Privacy" },
-  { href: "/terms", label: "Terms" },
+  { href: "/privacy", label: "Gizlilik" },
+  { href: "/terms", label: "Kullanım koşulları" },
 ];
+
+const linkClass = "inline-flex min-h-11 items-center px-2 text-base text-dark-ink-2 transition-colors hover:text-dark-ink";
 
 export default function Footer() {
   return (
-    <footer className="bg-dark text-dark-ink">
-      <div className="mx-auto max-w-[1440px] px-6 py-16 sm:px-8 lg:px-12 lg:py-24">
-        <div className="grid gap-12 lg:grid-cols-2 lg:gap-8">
-          <div>
-            <Image
-              src="/logo-dark.png"
-              alt="Altmetry"
-              width={142}
-              height={32}
-              className="mb-8 h-7 w-auto"
-            />
-            <p className="font-display text-2xl font-medium leading-tight tracking-tight sm:text-3xl">
-              Altmetry is a design, development, and consulting studio —
-              built to measure.
-            </p>
-            <div className="mt-8 flex flex-col gap-4 text-sm text-dark-ink/70">
-              <a
-                href="mailto:hello@altmetry.com"
-                className="w-fit text-dark-ink transition-colors hover:text-accent"
-              >
-                hello@altmetry.com
-              </a>
-              <p>Istanbul, Türkiye · Remote-friendly</p>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-2 gap-8 sm:grid-cols-3">
-            <div>
-              <p className="mb-4 text-xs uppercase tracking-wide text-dark-ink/40">
-                Sitemap
-              </p>
-              <ul className="flex flex-col gap-4">
-                {sitemap.map((item) => (
-                  <li key={item.href}>
-                    <Link
-                      href={item.href}
-                      className="text-sm text-dark-ink/70 transition-colors hover:text-accent"
-                    >
-                      {item.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div>
-              <p className="mb-4 text-xs uppercase tracking-wide text-dark-ink/40">
-                Social
-              </p>
-              <ul className="flex flex-col gap-4">
-                {social.map((item) => (
-                  <li key={item.href}>
-                    <a
-                      href={item.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-sm text-dark-ink/70 transition-colors hover:text-accent"
-                    >
-                      {item.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div>
-              <p className="mb-4 text-xs uppercase tracking-wide text-dark-ink/40">
-                Legal
-              </p>
-              <ul className="flex flex-col gap-4">
-                {legal.map((item) => (
-                  <li key={item.href}>
-                    <Link
-                      href={item.href}
-                      className="text-sm text-dark-ink/70 transition-colors hover:text-accent"
-                    >
-                      {item.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <div className="mt-16 flex flex-col gap-4 border-t border-dark-ink/10 pt-8 text-xs text-dark-ink/40 sm:flex-row sm:items-center sm:justify-between">
-          <p>© {new Date().getFullYear()} Altmetry. All rights reserved.</p>
-          <p>Design, development and strategy — built to measure.</p>
-        </div>
+    <footer className="border-t border-dark bg-dark-deep text-dark-ink">
+      <div className="mx-auto flex max-w-[1440px] flex-col items-center px-4 py-16 text-center sm:px-8 lg:px-12">
+        <Logo className="h-8 text-dark-ink" />
+        <nav aria-label="Alt menü" className="mt-8 flex flex-wrap justify-center gap-x-4">
+          {sitemap.map((item) => (
+            <Link key={item.href} href={item.href} className={linkClass}>
+              {item.label}
+            </Link>
+          ))}
+        </nav>
+        <nav aria-label="Yasal" className="flex flex-wrap justify-center gap-x-4">
+          {legal.map((item) => (
+            <Link key={item.href} href={item.href} className={linkClass}>
+              {item.label}
+            </Link>
+          ))}
+          {social.map((item) => (
+            <a key={item.href} href={item.href} target="_blank" rel="noopener noreferrer" className={linkClass}>
+              {item.label}
+            </a>
+          ))}
+        </nav>
+        <a href="mailto:hello@altmetry.com" className="mt-8 inline-flex min-h-11 items-center text-base text-dark-ink underline decoration-1 underline-offset-4">
+          hello@altmetry.com
+        </a>
+        <p className="mt-2 text-sm text-dark-ink-2">Altmetry · İstanbul · Türkiye ve yurt dışında uzaktan</p>
+        <p className="mt-2 text-sm text-dark-ink-2">© {new Date().getFullYear()} Altmetry. Tüm hakları saklıdır.</p>
       </div>
     </footer>
   );

@@ -1,107 +1,93 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
-import MagneticButton from "@/components/ui/MagneticButton";
-import { cn } from "@/lib/utils";
+import { usePathname } from "next/navigation";
+import { Logo } from "@/components/brand/Logo";
 
 const navLinks = [
-  { href: "/work", label: "Work" },
-  { href: "/services", label: "Services" },
-  { href: "/studio", label: "Studio" },
-  { href: "/journal", label: "Journal" },
-  { href: "/contact", label: "Contact" },
+  { href: "/services", label: "Hizmetler" },
+  { href: "/work", label: "Örnek senaryolar" },
+  { href: "/studio", label: "Hakkımızda" },
+  { href: "/journal", label: "Yazılar" },
+  { href: "/contact", label: "İletişim" },
 ];
 
 export default function Header() {
-  const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
+  const [hidden, setHidden] = useState(false);
+  const lastY = useRef(0);
 
+  // Aşağı kaydırınca menü gizlenir, yukarı kaydırınca döner (Infaiwor'daki davranış).
   useEffect(() => {
     function onScroll() {
-      setScrolled(window.scrollY > 24);
+      const y = window.scrollY;
+      if (y > lastY.current + 4 && y > window.innerHeight * 0.8) setHidden(true);
+      else if (y < lastY.current - 4 || y < 80) setHidden(false);
+      lastY.current = y;
     }
-    onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
     <header
-      className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-colors duration-300",
-        scrolled || menuOpen
-          ? "bg-white/55 backdrop-blur-xl backdrop-saturate-150 border-b border-white/50 shadow-[0_1px_24px_rgb(14_14_12_/_0.05)]"
-          : "bg-transparent"
-      )}
+      onFocusCapture={() => setHidden(false)}
+      className={`sticky top-0 z-50 border-b border-dark bg-dark-deep text-dark-ink transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${hidden && !menuOpen ? "nav-hide" : ""}`}
     >
-      <div className="mx-auto flex max-w-[1440px] items-center justify-between px-6 py-6 sm:px-8 lg:px-12">
-        <Link href="/" className="flex items-center" aria-label="Altmetry — home">
-          <Image
-            src="/logo-light.png"
-            alt="Altmetry"
-            width={160}
-            height={36}
-            className="h-8 w-auto"
-            priority
-          />
+      <div data-nav className="mx-auto flex max-w-[1440px] items-center justify-between gap-6 px-4 py-3 sm:px-8 lg:px-12">
+        <Link href="/" className="flex min-h-12 items-center" aria-label="Altmetry ana sayfa">
+          <Logo className="h-7 text-dark-ink sm:h-8" />
         </Link>
 
-        <nav className="hidden items-center gap-8 md:flex">
+        <nav aria-label="Ana menü" className="hidden items-center gap-1 lg:flex">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="text-sm text-ink/70 transition-colors hover:text-ink"
+              aria-current={pathname.startsWith(link.href) ? "page" : undefined}
+              className="inline-flex min-h-12 items-center rounded-full px-4 text-base text-dark-ink-2 transition-colors hover:text-dark-ink aria-[current=page]:text-peach"
             >
               {link.label}
             </Link>
           ))}
         </nav>
 
-        <div className="hidden items-center gap-6 lg:flex">
-          <MagneticButton href="/contact">Start a project</MagneticButton>
-        </div>
+        <Link
+          href="/contact"
+          className="hidden min-h-12 items-center rounded-full bg-accent px-6 text-base font-medium text-ink transition-colors hover:bg-accent-hover lg:inline-flex"
+        >
+          Ön görüşme planla
+        </Link>
 
         <button
-          className="flex items-center gap-2 text-sm text-ink md:hidden"
+          type="button"
+          className="inline-flex min-h-12 items-center rounded-full border border-dark-line px-4 text-base text-dark-ink lg:hidden"
           onClick={() => setMenuOpen((v) => !v)}
           aria-expanded={menuOpen}
-          aria-label="Toggle menu"
+          aria-controls="mobil-menu"
         >
-          <span>{menuOpen ? "Close" : "Menu"}</span>
+          {menuOpen ? "Kapat" : "Menü"}
         </button>
       </div>
 
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="overflow-hidden border-t border-ink/10 bg-canvas md:hidden"
+      <div id="mobil-menu" hidden={!menuOpen} className="border-t border-dark lg:hidden">
+        <nav aria-label="Mobil menü" className="flex flex-col px-4 py-4">
+          {navLinks.map((link) => (
+            <Link key={link.href} href={link.href} onClick={() => setMenuOpen(false)} className="flex min-h-12 items-center text-lg text-dark-ink">
+              {link.label}
+            </Link>
+          ))}
+          <Link
+            href="/contact"
+            onClick={() => setMenuOpen(false)}
+            className="mt-4 inline-flex min-h-12 items-center justify-center rounded-full bg-accent px-6 text-base font-medium text-ink"
           >
-            <div className="flex flex-col gap-2 px-6 py-6">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setMenuOpen(false)}
-                  className="py-4 text-lg text-ink/80 transition-colors hover:text-ink"
-                >
-                  {link.label}
-                </Link>
-              ))}
-              <div className="mt-4 flex items-center justify-between">
-                <MagneticButton href="/contact">Start a project</MagneticButton>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            Ön görüşme planla
+          </Link>
+        </nav>
+      </div>
     </header>
   );
 }

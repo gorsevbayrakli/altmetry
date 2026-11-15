@@ -1,247 +1,174 @@
 import { unsplash } from "@/lib/utils";
+import type { ServiceArea } from "@/lib/data/services";
 
-export type Discipline = "Design" | "Development" | "Consulting";
-
-export interface Project {
+/**
+ * Example scenarios ("Neler mümkün"). These are NOT client case studies:
+ * every page that renders them labels them as örnek senaryo. Replace with
+ * real, verifiable cases once the first pilots are finished.
+ */
+export interface Scenario {
   slug: string;
-  client: string;
+  name: string;
   title: string;
   summary: string;
-  discipline: Discipline[];
-  industry: string;
-  year: number;
+  areas: ServiceArea[];
+  sector: string;
+  duration: string;
   featured: boolean;
   coverImage: string;
-  gallery: string[];
-  challenge: string;
+  situation: string;
   approach: string;
-  outcome: string;
-  stats: { label: string; value: string }[];
+  goal: string;
+  metrics: { label: string; value: string }[];
 }
 
-export const projects: Project[] = [
+export const scenarioDisclaimer =
+  "Örnek senaryo. Gerçek bir müşteri vakası değildir; hedefler teşhis aşamasında sizinle birlikte belirlenir.";
+
+export const scenarios: Scenario[] = [
   {
-    slug: "northline-health",
-    client: "Northline Health",
-    title: "A patient portal people actually finish booking through",
+    slug: "teklif-hazirlama",
+    name: "Teklif hazırlama",
+    title: "Üç gün süren teklifi bir güne indirmek",
     summary:
-      "Rebuilt intake and scheduling around a single decision per screen, lifting completed bookings by 38%.",
-    discipline: ["Design", "Development"],
-    industry: "Healthcare",
-    year: 2025,
+      "Geçmiş tekliflerden beslenen bir asistan ilk taslağı çıkarır, satış ekibi kontrol edip özelleştirir.",
+    areas: ["Satış ve pazarlama", "Süreç iyileştirme"],
+    sector: "Üretim",
+    duration: "Pilot: 4–6 hafta",
     featured: true,
     coverImage: unsplash("1497366216548-37526070297c"),
-    gallery: [
-      unsplash("1497366216548-37526070297c"),
-      unsplash("1522202176988-66273c2fd55f"),
-      unsplash("1531973576160-7125cd663d86"),
-    ],
-    challenge:
-      "Northline's booking flow asked patients for nine fields before showing a single open appointment. Two in five sessions abandoned before confirmation, and call-center volume was rising faster than headcount.",
+    situation:
+      "Satış ekibi her teklif için eski dosyaları arıyor, firma tanıtımını, referansları, teknik kapsamı ve şartları yeniden kopyalıyor. Bir teklif ortalama üç gün sürüyor ve satış müdürü haftasının yarısını teklif kontrolüne harcıyor.",
     approach:
-      "We mapped every drop-off point against call-center transcripts, then rebuilt intake as a single-question-per-screen flow with live availability shown up front. Design and engineering shipped in the same two-week sprints so copy, layout, and API contracts stayed in sync.",
-    outcome:
-      "Completed bookings rose 38% in the first full quarter post-launch, and inbound scheduling calls dropped enough to redeploy two support staff to patient follow-up.",
-    stats: [
-      { label: "Booking completion", value: "+38%" },
-      { label: "Support call volume", value: "-24%" },
-      { label: "Time to book", value: "1m 40s" },
+      "Son iki yılın tekliflerini düzenli bir kütüphaneye dönüştürüyoruz. Müşteri talebini okuyup ilk taslağı bu kütüphaneden hazırlayan bir asistan kuruyoruz. Fiyat ve özel şartlar her zaman insanda kalıyor.",
+    goal:
+      "Teklif hazırlama süresini kısaltmak ve aynı ekiple daha fazla teklif verebilmek. Kalite kaybı olmadığını, kabul edilen teklif oranıyla takip ediyoruz.",
+    metrics: [
+      { label: "Teklif başına süre", value: "3 gün → 1 gün" },
+      { label: "Aylık teklif sayısı", value: "Artış" },
+      { label: "Kabul oranı", value: "Korunur" },
     ],
   },
   {
-    slug: "verra-freight",
-    client: "Verra Freight",
-    title: "Brand and ops dashboard for a freight network scaling fast",
+    slug: "yeni-musteri-bulma",
+    name: "Yeni müşteri bulma",
+    title: "Aynı 200 firmayı aramayı bırakmak",
     summary:
-      "A new identity and a real-time dispatch dashboard gave a 40-terminal network visibility it never had.",
-    discipline: ["Design", "Development", "Consulting"],
-    industry: "Logistics",
-    year: 2024,
+      "En iyi müşterilerin profilinden yeni hedef liste ve her firmaya kendi gündemiyle yazılmış mesajlar.",
+    areas: ["Satış ve pazarlama"],
+    sector: "Toptan ve dağıtım",
+    duration: "Pilot: 4–6 hafta",
     featured: true,
     coverImage: unsplash("1600607687939-ce8a6c25118c"),
-    gallery: [
-      unsplash("1600607687939-ce8a6c25118c"),
-      unsplash("1518770660439-4636190af475"),
-      unsplash("1581091012184-7e0cdfbb6797"),
-    ],
-    challenge:
-      "Verra had grown from 6 to 40 terminals in three years on a patchwork of spreadsheets and a decade-old brand that undersold their scale to enterprise shippers.",
+    situation:
+      "Satış ekibi yıllardır aynı listeyle çalışıyor. Yeni firma bulmak kişisel çevreye ve fuarlara bağlı. Gönderilen e-postalar herkese aynı, dönüş oranı düşük.",
     approach:
-      "Consulting led a positioning sprint to define Verra's category story, which set the brief for a new identity system and a dispatch dashboard built to surface delay risk before it became a missed delivery.",
-    outcome:
-      "Dispatch teams now catch at-risk shipments an average of 6 hours earlier, and the rebrand became the centerpiece of Verra's Series C pitch deck.",
-    stats: [
-      { label: "Delay detection", value: "6hrs earlier" },
-      { label: "Terminals onboarded", value: "40" },
-      { label: "Dashboard adoption", value: "94%" },
+      "Mevcut en iyi müşterilerinizin ortak özelliklerini çıkarıyor, bu profile uyan yeni firmaları ve karar vericileri buluyoruz. Her firmanın gündemine göre kişiselleştirilmiş e-posta ve LinkedIn akışı kuruyoruz. Yanıtlar satış ekibine sınıflandırılmış olarak düşüyor.",
+    goal:
+      "Satış ekibinin zamanını liste temizlemekten nitelikli görüşmeye kaydırmak.",
+    metrics: [
+      { label: "Aylık nitelikli görüşme", value: "Artış" },
+      { label: "Listeye harcanan saat", value: "Azalış" },
+      { label: "Yanıt oranı", value: "Takip" },
     ],
   },
   {
-    slug: "solace-financial",
-    client: "Solace Financial",
-    title: "Repositioning a wealth platform for a category it helped create",
+    slug: "ay-sonu-raporu",
+    name: "Ay sonu raporu",
+    title: "Dört kişinin iki gününü alan raporu otomatikleştirmek",
     summary:
-      "New positioning and a marketing site rebuilt around outcomes, not features, ahead of a Series B raise.",
-    discipline: ["Consulting", "Design"],
-    industry: "Finance",
-    year: 2026,
+      "Farklı sistemlerdeki veriyi kendiliğinden toplayan ve her sabah güncel olan bir yönetim panosu.",
+    areas: ["Süreç iyileştirme"],
+    sector: "Profesyonel hizmetler",
+    duration: "Pilot: 4–6 hafta",
     featured: true,
     coverImage: unsplash("1541746972996-4e0b0f43e02a"),
-    gallery: [
-      unsplash("1541746972996-4e0b0f43e02a"),
-      unsplash("1531973576160-7125cd663d86"),
-      unsplash("1517245386807-bb43f82c33c4"),
-    ],
-    challenge:
-      "Solace's product had matured past its original pitch, but the site and sales collateral still described a feature set three releases behind, confusing prospects mid-funnel.",
+    situation:
+      "Ay sonunda muhasebe, satış ve operasyon verileri Excel'de elle birleştiriliyor. Rapor yönetime ayın ilk haftasının sonunda ulaşıyor, kararlar gecikiyor.",
     approach:
-      "We ran a positioning workshop with product, sales, and leadership to rebuild the value narrative around client outcomes, then redesigned the marketing site to carry that story from headline to CTA.",
-    outcome:
-      "Demo-to-close rate improved 21% in the two quarters following launch, and the new narrative became the backbone of the Series B deck.",
-    stats: [
-      { label: "Demo-to-close", value: "+21%" },
-      { label: "Site conversion", value: "+3.4x" },
+      "Verinin hangi sistemden geldiğini haritalıyor, toplama ve birleştirme adımlarını otomatikleştiriyoruz. Yapay zekâ olağan dışı değişimleri işaretleyip kısa bir yorum yazıyor.",
+    goal: "Rapor hazırlığına giden saati azaltmak ve yönetimin güncel veriyle karar vermesini sağlamak.",
+    metrics: [
+      { label: "Rapora harcanan süre", value: "2 gün → saatler" },
+      { label: "Rapor gecikmesi", value: "Yok" },
     ],
   },
   {
-    slug: "kessler-and-vine",
-    client: "Kessler & Vine",
-    title: "An ecommerce rebuild for a wine retailer outgrowing its platform",
+    slug: "sirket-ici-bilgi",
+    name: "Şirket içi bilgi",
+    title: "Aynı soruların yanıtını bir asistana devretmek",
     summary:
-      "Migrated to a custom Shopify build with faster checkout and a merchandising system staff could run themselves.",
-    discipline: ["Development", "Design"],
-    industry: "Retail",
-    year: 2025,
+      "Prosedürler ve dokümanlar üzerinden kaynak göstererek yanıt veren bir şirket içi asistan.",
+    areas: ["Süreç iyileştirme", "Yönetişim ve ölçüm"],
+    sector: "Üretim ve kalite",
+    duration: "Pilot: 4–6 hafta",
     featured: true,
     coverImage: unsplash("1556742049-0cfed4f6a45d"),
-    gallery: [
-      unsplash("1556742049-0cfed4f6a45d"),
-      unsplash("1441984904996-e0b6ba687e04"),
-      unsplash("1600880292203-757bb62b4baf"),
-    ],
-    challenge:
-      "Kessler & Vine's legacy platform couldn't support the allocation-based selling their top wines needed, and every merchandising change required a developer ticket.",
+    situation:
+      "Kalite ve operasyon ekipleri gün içinde sürekli aynı soruları yanıtlıyor: hangi prosedür, hangi form, hangi sürüm. Yeni gelenlerin işe alışması aylar sürüyor.",
     approach:
-      "We rebuilt the storefront on Shopify with a custom allocation and waitlist app, then handed the merchandising team a block-based editor so campaigns could ship without engineering.",
-    outcome:
-      "Checkout time fell by half, allocation drops sold out in under ten minutes, and the marketing team now ships new landing pages same-day.",
-    stats: [
-      { label: "Checkout time", value: "-50%" },
-      { label: "Allocation sell-through", value: "<10min" },
-      { label: "Mobile conversion", value: "+2.1x" },
+      "Doküman ve prosedürleri düzenliyor, yalnızca bu kaynaklardan ve kaynağını göstererek yanıt veren bir asistan kuruyoruz. Kimin hangi dokümana erişebileceğini yetki yapısıyla belirliyoruz.",
+    goal: "Uzman ekibin bölünen zamanını geri kazanmak ve yeni çalışanların işe alışmasını hızlandırmak.",
+    metrics: [
+      { label: "Tekrarlayan soru sayısı", value: "Azalış" },
+      { label: "İşe alışma süresi", value: "Kısalma" },
     ],
   },
   {
-    slug: "meridian-outdoor",
-    client: "Meridian Outdoor",
-    title: "A DTC launch for a gear brand skipping wholesale entirely",
+    slug: "siparis-isleme",
+    name: "Sipariş işleme",
+    title: "E-postayla gelen siparişleri elle girmeyi bırakmak",
     summary:
-      "Brand system and ecommerce build for a direct-to-consumer launch that hit its first-year revenue target in five months.",
-    discipline: ["Design", "Development"],
-    industry: "Outdoor & Recreation",
-    year: 2023,
+      "Farklı formatlarda gelen sipariş e-postalarını okuyup ERP'ye hazırlayan, emin olmadığında soran bir akış.",
+    areas: ["Süreç iyileştirme"],
+    sector: "Toptan ve perakende",
+    duration: "Pilot: 4–6 hafta",
     featured: true,
-    coverImage: unsplash("1573497019940-1c28c88b4f3e"),
-    gallery: [
-      unsplash("1573497019940-1c28c88b4f3e"),
-      unsplash("1521737604893-d14cc237f11d"),
-      unsplash("1600880292203-757bb62b4baf"),
-    ],
-    challenge:
-      "Meridian had product ready to ship but no brand, no site, and a hard launch date tied to a trade show four months out.",
-    approach:
-      "We ran design and development in parallel: identity and photography direction in weeks one and two, storefront build starting week three, so nothing waited in a queue.",
-    outcome:
-      "Meridian hit its year-one revenue target in five months and sold out its launch collection twice.",
-    stats: [
-      { label: "Year-one target", value: "5 months" },
-      { label: "Launch sellouts", value: "2x" },
-    ],
-  },
-  {
-    slug: "basalt-robotics",
-    client: "Basalt Robotics",
-    title: "A product site and investor narrative for an industrial robotics team",
-    summary:
-      "Positioning and a technical marketing site that helped a hardware team raise its Series A.",
-    discipline: ["Consulting", "Design"],
-    industry: "Robotics & Manufacturing",
-    year: 2024,
-    featured: false,
-    coverImage: unsplash("1565043666747-69f6646db940"),
-    gallery: [
-      unsplash("1565043666747-69f6646db940"),
-      unsplash("1600607687939-ce8a6c25118c"),
-      unsplash("1518770660439-4636190af475"),
-    ],
-    challenge:
-      "Basalt's engineering was ahead of its story — investors and prospective customers couldn't tell the arm-automation platform apart from a dozen other robotics decks.",
-    approach:
-      "Consulting distilled the technical differentiation into a market category story, which design then translated into a site built to survive scrutiny from both engineers and investors.",
-    outcome:
-      "Basalt closed its Series A within the quarter and now uses the site as its default technical sales asset.",
-    stats: [
-      { label: "Funding round", value: "Series A" },
-      { label: "Qualified demo requests", value: "+64%" },
-    ],
-  },
-  {
-    slug: "fennimore-coffee-co",
-    client: "Fennimore Coffee Co.",
-    title: "A subscription platform built for a roaster's actual fulfillment flow",
-    summary:
-      "Custom subscription and roast-scheduling logic replaced three disconnected tools and cut fulfillment errors sharply.",
-    discipline: ["Development"],
-    industry: "Food & Beverage",
-    year: 2026,
-    featured: false,
     coverImage: unsplash("1495474472287-4d71bcdd2085"),
-    gallery: [
-      unsplash("1495474472287-4d71bcdd2085"),
-      unsplash("1447933601403-0c6688de566e"),
-      unsplash("1524758631624-e2822e304c36"),
-    ],
-    challenge:
-      "Fennimore ran subscriptions through a generic app that didn't understand roast schedules, so fulfillment staff manually reconciled orders against roast batches every week.",
+    situation:
+      "Siparişler e-posta, PDF ve Excel olarak geliyor. İki kişi gün boyu bunları ERP'ye elle giriyor; yoğun dönemlerde hata ve gecikme artıyor.",
     approach:
-      "We built subscription logic directly into their storefront, syncing delivery dates to actual roast-batch capacity instead of a fixed calendar.",
-    outcome:
-      "Fulfillment errors dropped 71% and the fulfillment team reclaimed roughly six hours a week previously spent on manual reconciliation.",
-    stats: [
-      { label: "Fulfillment errors", value: "-71%" },
-      { label: "Manual hours saved", value: "6/week" },
+      "Gelen siparişleri okuyan, ürün kodlarını eşleştiren ve ERP'ye taslak olarak hazırlayan bir akış kuruyoruz. Emin olmadığı her satırı bir insana onaya gönderiyor.",
+    goal: "Elle veri girişini azaltmak, hatayı düşürmek ve ekibi müşteriyle ilgilenmeye ayırmak.",
+    metrics: [
+      { label: "Elle girilen sipariş", value: "Azalış" },
+      { label: "Hatalı kayıt", value: "Azalış" },
+      { label: "Sipariş işleme süresi", value: "Kısalma" },
     ],
   },
   {
-    slug: "arcform-studio",
-    client: "Arcform Studio",
-    title: "A portfolio and CMS built for an architecture practice's pace of work",
+    slug: "ai-kullanim-politikasi",
+    name: "AI kullanım kuralları",
+    title: "Herkesin kendi bildiği gibi kullandığı yapay zekâya kural koymak",
     summary:
-      "A self-serve portfolio site let a 12-person practice publish new work the week it wraps, not the quarter after.",
-    discipline: ["Design", "Development"],
-    industry: "Architecture & Real Estate",
-    year: 2023,
-    featured: false,
-    coverImage: unsplash("1486406146926-c627a92ad1ab"),
-    gallery: [
-      unsplash("1486406146926-c627a92ad1ab"),
-      unsplash("1487958449943-2429e8be8625"),
-      unsplash("1497366811353-6870744d04b2"),
-    ],
-    challenge:
-      "Arcform's previous site required a developer for every project upload, so finished work sat unpublished for months at a time.",
+      "Tek sayfalık kullanım politikası, onaylı araçlar ve kullanımın gerçekten değer üretip üretmediğini gösteren basit ölçüler.",
+    areas: ["Yönetişim ve ölçüm"],
+    sector: "Her sektör",
+    duration: "Teşhisle birlikte: 1 hafta",
+    featured: true,
+    coverImage: unsplash("1565043666747-69f6646db940"),
+    situation:
+      "Ekipte birçok kişi yapay zekâ araçlarını kişisel hesaplarla kullanıyor. Müşteri verisinin nereye gittiği belli değil, kimin ne kazandığı da bilinmiyor.",
     approach:
-      "We designed a flexible project template system and a CMS the studio's own coordinators could run, matched to how architecture portfolios actually get assembled.",
-    outcome:
-      "Arcform now publishes new projects within a week of completion and has tripled organic site traffic since launch.",
-    stats: [
-      { label: "Publish time", value: "1 week" },
-      { label: "Organic traffic", value: "+3x" },
+      "Onaylı araçları, hiçbir araca girmeyecek verileri, onay adımlarını ve bir sorun çıktığında izlenecek yolu tek sayfada topluyoruz. Kullanımı ve iş sonucunu ayrı ayrı ölçen basit bir takip kuruyoruz.",
+    goal: "Veri riskini kapatmak ve yapay zekâ kullanımının hangi işte gerçekten değer ürettiğini görmek.",
+    metrics: [
+      { label: "Onaysız araç kullanımı", value: "Kapatılır" },
+      { label: "Benimseme ve değer", value: "Ayrı ölçülür" },
     ],
   },
 ];
 
-export const featuredProjects = projects.filter((p) => p.featured);
-export const industries = Array.from(new Set(projects.map((p) => p.industry))).sort();
-export const disciplines: Discipline[] = ["Design", "Development", "Consulting"];
-export const years = Array.from(new Set(projects.map((p) => p.year))).sort((a, b) => b - a);
+// Süreç iyileştirme giriş kapısı olduğu için süreç senaryoları önce gelir.
+const featuredOrder = ["siparis-isleme", "ay-sonu-raporu", "sirket-ici-bilgi", "teklif-hazirlama", "yeni-musteri-bulma", "ai-kullanim-politikasi"];
+export const featuredScenarios = scenarios
+  .filter((s) => s.featured)
+  .sort((a, b) => featuredOrder.indexOf(a.slug) - featuredOrder.indexOf(b.slug));
+export const scenarioAreas: ServiceArea[] = [
+  "Satış ve pazarlama",
+  "Süreç iyileştirme",
+  "Yönetişim ve ölçüm",
+];
+export const scenarioSectors = Array.from(new Set(scenarios.map((s) => s.sector))).sort((a, b) =>
+  a.localeCompare(b, "tr")
+);

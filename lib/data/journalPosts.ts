@@ -1,10 +1,11 @@
 import { unsplash } from "@/lib/utils";
+import type { ServiceArea } from "@/lib/data/services";
 
 export interface JournalPost {
   slug: string;
   title: string;
   excerpt: string;
-  category: string;
+  category: ServiceArea;
   author: string;
   date: string;
   readTime: string;
@@ -14,51 +15,54 @@ export interface JournalPost {
 
 export const journalPosts: JournalPost[] = [
   {
-    slug: "why-conversion-lift-is-a-design-problem",
-    title: "Why your conversion lift is a design problem, not a marketing one",
+    slug: "kullanmak-ve-deger-almak",
+    title: "“Yapay zekâ kullanıyoruz” ile “yapay zekâdan değer alıyoruz” arasındaki fark",
     excerpt:
-      "Most teams tune ad copy and landing-page headlines for months before touching the flow underneath. Usually the flow is the actual problem.",
-    category: "Strategy",
-    author: "Naz Aydın",
-    date: "2026-05-14",
-    readTime: "6 min read",
+      "Ekibin yüzde kaçının yapay zekâ kullandığı tek başına bir şey söylemiyor. Benimsemeyi değerden ayırmadan sonuç görünmüyor.",
+    category: "Yönetişim ve ölçüm",
+    author: "Altmetry",
+    date: "2026-11-12",
+    readTime: "5 dk okuma",
     coverImage: unsplash("1531973576160-7125cd663d86"),
     content: [
-      "When conversion stalls, the instinct is almost always to rewrite the headline. Sometimes that's right. More often, the headline is fine and the three-step form beneath it is the actual leak.",
-      "Across the last dozen conversion audits we've run, the highest-leverage fix was rarely copy. It was removing a field, reordering a decision, or showing the price before asking for an email address.",
-      "Marketing can only push traffic toward a flow that's already working. If the flow itself asks too much too early, no amount of ad spend fixes that — it just gets more people to see the same drop-off.",
+      "“Ekibimizin %80'i yapay zekâ kullanıyor” güzel bir cümle. Ama o işlerin daha hızlı, daha ucuz ya da daha iyi yapılıp yapılmadığını söylemiyor.",
+      "Büyük bir ekibin yapay zekâ dönüşümünü yönetirken öğrendiğimiz ilk şey şu oldu: insanların “kullanıyorum” demesi ile kullanım verisinin gösterdiği çoğu zaman farklıdır. İkinci şey: kullanmak her zaman değer üretmek anlamına gelmez.",
+      "Bu yüzden iki şeyi ayrı ölçüyoruz. Benimseme: kim, ne sıklıkla, hangi işte kullanıyor? Değer: o iş daha hızlı, daha ucuz ya da daha iyi mi oldu? O dönüşümde ölçtüğümüz %40 net verimlilik artışını ancak bu ikisini ayırdıktan sonra görebildik.",
+      "Bir KOBİ için başlangıçta üç ölçü yeter: seçilen işte harcanan süre, o işin hata ya da geri dönüş oranı ve ekibin aracı haftada kaç gün kullandığı. Üçü birlikte okunduğunda yapay zekânın nerede gerçekten işe yaradığı görünür.",
     ],
   },
   {
-    slug: "positioning-before-pixels",
-    title: "Positioning before pixels: why we don't open Figma first",
+    slug: "teklif-hazirliginda-yapay-zeka",
+    title: "Teklif hazırlığına yapay zekâ: en değerli veriniz geçmiş teklifleriniz",
     excerpt:
-      "Every design decision downstream of a fuzzy positioning statement is a guess. Here's how we get to clarity before anyone touches a mockup.",
-    category: "Consulting",
-    author: "Deniz Kaya",
-    date: "2026-03-02",
-    readTime: "5 min read",
+      "Bir teklifin büyük kısmı önceki tekliflerde zaten yazılmış durumda. Zaman yeniyi yazmaya değil, eskiyi bulup uyarlamaya gidiyor.",
+    category: "Satış ve pazarlama",
+    author: "Altmetry",
+    date: "2026-11-05",
+    readTime: "4 dk okuma",
     coverImage: unsplash("1553877522-43269d4ea984"),
     content: [
-      "A brief that says 'make it feel premium' isn't a brief — it's a mood. Design needs something sharper to push against, and that sharpness has to come from positioning, not aesthetics.",
-      "We run a short positioning sprint before any design work starts: competitive alternatives, what's actually unique about the product, who the buyer is, and what category they'd put you in if no one told them your name.",
-      "Everything downstream — layout, tone, even color — gets easier to decide once the team agrees on what the company is actually claiming to be.",
+      "Yıllarca kurumsal projeler için RFP yanıtları ve teklifler hazırladık; üç ülkede, üç ayrı ofisle. Gördüğümüz şey şuydu: firma tanıtımı, referans kurgusu, kapsam maddeleri ve şartlar her teklifte büyük ölçüde tekrar ediyor.",
+      "Zaman yeni bir şey yazmaya gitmiyor. Doğru eski dosyayı bulmaya, kopyalamaya, güncel olmayan kısmı fark etmeye ve biçimi düzeltmeye gidiyor.",
+      "Yapay zekânın KOBİ'ler için en hızlı karşılık verdiği yerlerden biri bu. Geçmiş tekliflerden beslenen bir asistan müşteri talebini okuyup ilk taslağı çıkarır. Fiyat, özel şartlar ve son kontrol insanda kalır.",
+      "Başlamak için önce kütüphane gerekir: son iki yılın tekliflerini tek bir yerde, düzenli ve güncel tutmak. Asistan ancak beslendiği kaynak kadar iyidir.",
     ],
   },
   {
-    slug: "the-real-cost-of-a-slow-handoff",
-    title: "The real cost of a slow design-to-dev handoff",
+    slug: "tek-sayfalik-ai-politikasi",
+    title: "AI kullanım politikası: 10 kişilik şirket için tek sayfa",
     excerpt:
-      "Every week a finished design sits in a queue waiting for a developer is a week of drift between what was designed and what ships.",
-    category: "Development",
-    author: "Elif Sarı",
-    date: "2026-01-20",
-    readTime: "4 min read",
+      "Küçük bir şirketin 40 sayfalık bir yönetmeliğe ihtiyacı yok. Dört soruya net cevap vermesi yeter.",
+    category: "Yönetişim ve ölçüm",
+    author: "Altmetry",
+    date: "2026-10-29",
+    readTime: "3 dk okuma",
     coverImage: unsplash("1461749280684-dccba630e2f6"),
     content: [
-      "The handoff gap is where most product quality actually gets lost — not in the design file, not in the code, but in the translation between them.",
-      "Running design and development in the same sprints, with the same standups, closes that gap almost entirely. Questions get answered in minutes instead of surfacing three weeks later as a Slack thread.",
-      "It's slower to set up than a traditional agency-then-dev-shop pipeline. It's faster for everything that follows.",
+      "Ekibinizde birileri büyük ihtimalle yapay zekâ araçlarını kişisel hesaplarıyla kullanıyor. Bu kendi başına sorun değil. Sorun, müşteri verisinin nereye gittiğini kimsenin bilmemesi.",
+      "Tek sayfalık bir politika dört soruya cevap verir. Hangi araçlar onaylı? Hangi veri hiçbir araca girmez (müşteri kişisel verisi, fiyat listeleri, sözleşmeler)? Bir yapay zekâ ajanı neye dokunabilir ve kim onaylar? Bir şey ters giderse kime haber verilir?",
+      "Yetkiyi bir aç/kapa düğmesi olarak düşünmüyoruz. Bir ajanın yalnızca okuyabildiği, taslak hazırlayabildiği ve gerçekten işlem yapabildiği alanlar ayrıdır. Her basamakta onaylayan kişi bellidir.",
+      "Politika yazıldıktan sonra ekiple birlikte bir kez okunmalı ve üç ayda bir güncellenmeli. Araçlar hızla değişiyor; kurallar da onlarla birlikte değişmeli.",
     ],
   },
 ];

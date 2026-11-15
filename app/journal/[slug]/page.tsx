@@ -2,123 +2,100 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import Reveal from "@/components/ui/Reveal";
+import { PageCta } from "@/components/page/PageHero";
 import { journalPosts } from "@/lib/data/journalPosts";
 
 export function generateStaticParams() {
   return journalPosts.map((p) => ({ slug: p.slug }));
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const post = journalPosts.find((p) => p.slug === slug);
   if (!post) return {};
-  return { title: `${post.title} — Altmetry`, description: post.excerpt };
+  return { title: `${post.title} · Altmetry`, description: post.excerpt };
 }
 
-export default async function JournalPostPage({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
+export default async function JournalPostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const index = journalPosts.findIndex((p) => p.slug === slug);
-  const post = journalPosts[index];
+  const post = journalPosts.find((p) => p.slug === slug);
   if (!post) notFound();
   const related = journalPosts.filter((p) => p.slug !== slug).slice(0, 2);
-
   const shareUrl = `https://altmetry.com/journal/${post.slug}`;
+  const date = new Date(post.date).toLocaleDateString("tr-TR", { day: "numeric", month: "long", year: "numeric" });
 
   return (
-    <article className="px-6 pb-24 pt-32 sm:px-8 lg:px-12 lg:pt-40">
-      <div className="mx-auto max-w-3xl">
-        <Reveal>
-          <p className="mb-4 text-xs uppercase tracking-wide text-accent">
-            {post.category}
-          </p>
-          <h1 className="font-display text-4xl font-medium leading-[1.05] tracking-tight text-ink sm:text-5xl">
-            {post.title}
+    <article>
+      <header data-hero className="dot-grid px-4 pt-24 pb-16 sm:px-8 lg:px-12 lg:pt-32">
+        <div className="mx-auto max-w-[880px]">
+          <h1 className="font-display text-[clamp(36px,5vw,64px)] font-light leading-[1.08] tracking-[-0.03em] text-dark-ink">
+            <span className="ln block">{post.title}</span>
           </h1>
-          <p className="mt-6 text-sm text-ink/50">
-            {post.author} · {post.date} · {post.readTime}
-          </p>
-        </Reveal>
-
-        <Reveal delay={0.1}>
-          <div className="relative my-12 aspect-[16/9] overflow-hidden rounded-2xl bg-ink/5">
-            <Image
-              src={post.coverImage}
-              alt={post.title}
-              fill
-              sizes="768px"
-              priority
-              className="object-cover"
-            />
+          <div data-hero-rest>
+            <p className="mt-6 text-base text-dark-ink-2">
+              {post.category} · {date} · {post.readTime}
+            </p>
           </div>
-        </Reveal>
+        </div>
+      </header>
 
-        <div className="flex flex-col gap-6">
-          {post.content.map((paragraph, i) => (
-            <Reveal key={i} delay={i * 0.05}>
-              <p className="text-base leading-relaxed text-ink/80 sm:text-lg">
+      <div className="px-4 sm:px-8 lg:px-12">
+        <div className="mx-auto max-w-[880px]">
+          <div data-up className="relative aspect-[16/9] overflow-hidden rounded-2xl bg-dark-raise">
+            <Image src={post.coverImage} alt="" fill priority sizes="(min-width: 880px) 880px, 100vw" className="object-cover" />
+          </div>
+
+          <div className="mt-16 flex max-w-[68ch] flex-col gap-6">
+            {post.content.map((paragraph, i) => (
+              <p key={i} data-up className="text-lg leading-relaxed text-dark-ink">
                 {paragraph}
               </p>
-            </Reveal>
-          ))}
-        </div>
-
-        <Reveal className="mt-14 flex flex-wrap items-center gap-3 border-t border-ink/10 pt-8">
-          <span className="text-xs uppercase tracking-wide text-ink/40">
-            Share
-          </span>
-          <a
-            href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(post.title)}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-sm text-ink/70 hover:text-accent"
-          >
-            X / Twitter
-          </a>
-          <a
-            href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-sm text-ink/70 hover:text-accent"
-          >
-            LinkedIn
-          </a>
-        </Reveal>
-
-        {related.length > 0 && (
-          <div className="mt-16 border-t border-ink/10 pt-10">
-            <p className="mb-6 text-xs uppercase tracking-wide text-ink/40">
-              Related
-            </p>
-            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
-              {related.map((p) => (
-                <Link key={p.slug} href={`/journal/${p.slug}`} className="group block">
-                  <div className="relative aspect-[16/10] overflow-hidden rounded-xl bg-ink/5">
-                    <Image
-                      src={p.coverImage}
-                      alt={p.title}
-                      fill
-                      sizes="384px"
-                      className="object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
-                  </div>
-                  <p className="mt-3 font-display text-base font-medium tracking-tight text-ink group-hover:text-accent transition-colors">
-                    {p.title}
-                  </p>
-                </Link>
-              ))}
-            </div>
+            ))}
           </div>
-        )}
+
+          <div className="mt-16 flex max-w-[68ch] flex-wrap items-center gap-x-6 border-t border-dark-line pt-8">
+            <p className="text-base text-dark-ink-2">Paylaş</p>
+            <a
+              href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-11 items-center text-base text-dark-ink underline decoration-1 underline-offset-4"
+            >
+              LinkedIn
+            </a>
+            <a
+              href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(post.title)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-11 items-center text-base text-dark-ink underline decoration-1 underline-offset-4"
+            >
+              X (Twitter)
+            </a>
+          </div>
+
+          {related.length > 0 && (
+            <section aria-labelledby="diger-baslik" className="mt-24 border-t border-dark-line pt-12 pb-24">
+              <h2 id="diger-baslik" className="font-display text-3xl font-light text-dark-ink">
+                Diğer yazılar
+              </h2>
+              <ul className="mt-8 grid gap-8 sm:grid-cols-2">
+                {related.map((p) => (
+                  <li key={p.slug} data-up>
+                    <Link href={`/journal/${p.slug}`} className="group block">
+                      <div className="relative aspect-[16/10] overflow-hidden rounded-xl bg-dark-raise">
+                        <Image src={p.coverImage} alt="" fill sizes="(min-width: 640px) 432px, 100vw" className="object-cover transition-transform duration-500 group-hover:scale-[1.03]" />
+                      </div>
+                      <h3 className="mt-4 text-xl font-medium leading-snug text-dark-ink group-hover:underline group-hover:decoration-1 group-hover:underline-offset-4">{p.title}</h3>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
+        </div>
       </div>
+
+      <PageCta title="Bu konuyu kendi şirketinizde" accent="konuşalım mı?" />
     </article>
   );
 }

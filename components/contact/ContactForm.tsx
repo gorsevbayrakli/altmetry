@@ -3,22 +3,21 @@
 import { useState, type FormEvent } from "react";
 import { cn } from "@/lib/utils";
 
-const projectTypes = [
-  "Brand identity",
-  "Website or product build",
-  "Full rebrand + rebuild",
-  "Consulting / positioning",
-  "Ongoing retainer",
-  "Other",
+const companySizes = ["1–10", "11–50", "51–250", "250+"];
+
+const priorities = [
+  "Satış ve pazarlama",
+  "Süreçler",
+  "Yönetişim ve ölçüm",
+  "Emin değilim",
 ];
 
 const budgetRanges = [
-  "Under $10k",
-  "$10k – $25k",
-  "$25k – $75k",
-  "$75k – $150k",
-  "$150k+",
-  "Not sure yet",
+  "Henüz bilmiyorum",
+  "100 bin TL altı",
+  "100–250 bin TL",
+  "250–500 bin TL",
+  "500 bin TL üzeri",
 ];
 
 type Status = "idle" | "submitting" | "success" | "error";
@@ -34,7 +33,7 @@ function Field({
 }) {
   return (
     <div className="flex flex-col gap-2">
-      <label htmlFor={htmlFor} className="text-xs uppercase tracking-wide text-ink/50">
+      <label htmlFor={htmlFor} className="text-base font-medium text-dark-ink">
         {label}
       </label>
       {children}
@@ -43,7 +42,7 @@ function Field({
 }
 
 const inputClasses =
-  "w-full border-b border-ink/20 bg-transparent py-4 text-base text-ink outline-none transition-colors focus:border-accent placeholder:text-ink/30";
+  "min-h-12 w-full rounded-lg border border-dark-line bg-dark-deep px-4 py-3 text-base text-dark-ink transition-colors placeholder:text-dark-mute focus:border-peach focus:outline-2 focus:outline-offset-2 focus:outline-peach";
 
 export default function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
@@ -60,15 +59,16 @@ export default function ContactForm() {
       name: String(data.get("name") ?? "").trim(),
       email: String(data.get("email") ?? "").trim(),
       company: String(data.get("company") ?? "").trim(),
-      projectType: String(data.get("projectType") ?? ""),
+      companySize: String(data.get("companySize") ?? ""),
+      priority: String(data.get("priority") ?? ""),
       budget: String(data.get("budget") ?? ""),
       message: String(data.get("message") ?? "").trim(),
     };
 
     const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email);
-    if (!payload.name || !emailValid || !payload.projectType || !payload.budget || !payload.message) {
+    if (!payload.name || !emailValid || !payload.priority || !payload.message) {
       setStatus("error");
-      setErrorMessage("Please fill in all required fields with a valid email.");
+      setErrorMessage("Lütfen zorunlu alanları doldurun ve geçerli bir e-posta girin.");
       return;
     }
 
@@ -81,26 +81,22 @@ export default function ContactForm() {
 
       if (!res.ok) {
         const body = await res.json().catch(() => null);
-        throw new Error(body?.error ?? "Something went wrong. Please try again.");
+        throw new Error(body?.error ?? "Bir sorun oluştu. Lütfen tekrar deneyin.");
       }
 
       setStatus("success");
       form.reset();
     } catch (err) {
       setStatus("error");
-      setErrorMessage(err instanceof Error ? err.message : "Something went wrong.");
+      setErrorMessage(err instanceof Error ? err.message : "Bir sorun oluştu.");
     }
   }
 
   if (status === "success") {
     return (
-      <div className="rounded-2xl border border-accent/30 bg-accent/5 p-8">
-        <p className="font-display text-2xl font-medium tracking-tight text-ink">
-          Thanks — we got it.
-        </p>
-        <p className="mt-2 text-sm text-ink/70">
-          We read every inquiry personally and reply within two business days.
-        </p>
+      <div role="status" className="rounded-2xl bg-peach p-8 text-ink">
+        <p className="font-display text-2xl font-medium">Teşekkürler, mesajınız bize ulaştı.</p>
+        <p className="mt-2 text-base">Her mesajı kendimiz okuyoruz; size e-postayla döneceğiz.</p>
       </div>
     );
   }
@@ -108,58 +104,67 @@ export default function ContactForm() {
   return (
     <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-8">
       <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
-        <Field label="Name" htmlFor="name">
-          <input id="name" name="name" type="text" required className={inputClasses} placeholder="Your name" />
+        <Field label="Ad soyad" htmlFor="name">
+          <input id="name" name="name" type="text" required autoComplete="name" className={inputClasses} placeholder="Adınız" />
         </Field>
-        <Field label="Email" htmlFor="email">
-          <input id="email" name="email" type="email" required className={inputClasses} placeholder="you@company.com" />
+        <Field label="E-posta" htmlFor="email">
+          <input id="email" name="email" type="email" required autoComplete="email" className={inputClasses} placeholder="siz@sirketiniz.com" />
         </Field>
       </div>
-
-      <Field label="Company" htmlFor="company">
-        <input id="company" name="company" type="text" className={inputClasses} placeholder="Company (optional)" />
-      </Field>
 
       <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
-        <Field label="Project type" htmlFor="projectType">
-          <select id="projectType" name="projectType" required defaultValue="" className={cn(inputClasses, "appearance-none")}>
-            <option value="" disabled>
-              Select one
-            </option>
-            {projectTypes.map((type) => (
-              <option key={type} value={type}>
-                {type}
-              </option>
-            ))}
-          </select>
+        <Field label="Şirket" htmlFor="company">
+          <input id="company" name="company" type="text" autoComplete="organization" className={inputClasses} placeholder="Şirket (isteğe bağlı)" />
         </Field>
-        <Field label="Budget range" htmlFor="budget">
-          <select id="budget" name="budget" required defaultValue="" className={cn(inputClasses, "appearance-none")}>
-            <option value="" disabled>
-              Select one
-            </option>
-            {budgetRanges.map((range) => (
-              <option key={range} value={range}>
-                {range}
+        <Field label="Çalışan sayısı" htmlFor="companySize">
+          <select id="companySize" name="companySize" defaultValue="" className={cn(inputClasses, "appearance-none")}>
+            <option value="">Seçin (isteğe bağlı)</option>
+            {companySizes.map((size) => (
+              <option key={size} value={size}>
+                {size}
               </option>
             ))}
           </select>
         </Field>
       </div>
 
-      <Field label="Message" htmlFor="message">
+      <Field label="Önceliğiniz" htmlFor="priority">
+        <select id="priority" name="priority" required defaultValue="" className={cn(inputClasses, "appearance-none")}>
+          <option value="" disabled>
+            Birini seçin
+          </option>
+          {priorities.map((p) => (
+            <option key={p} value={p}>
+              {p}
+            </option>
+          ))}
+        </select>
+      </Field>
+
+      <Field label="Mesaj" htmlFor="message">
         <textarea
           id="message"
           name="message"
           required
           rows={5}
           className={cn(inputClasses, "resize-none")}
-          placeholder="Tell us about the project."
+          placeholder="Sizi en çok yoran üç iş hangisi?"
         />
       </Field>
 
+      <Field label="Bütçe (isteğe bağlı)" htmlFor="budget">
+        <select id="budget" name="budget" defaultValue="" className={cn(inputClasses, "appearance-none")}>
+          <option value="">Seçin</option>
+          {budgetRanges.map((range) => (
+            <option key={range} value={range}>
+              {range}
+            </option>
+          ))}
+        </select>
+      </Field>
+
       {status === "error" && errorMessage && (
-        <p role="alert" className="text-sm text-accent">
+        <p role="alert" className="text-base text-error-dark">
           {errorMessage}
         </p>
       )}
@@ -167,9 +172,9 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={status === "submitting"}
-        className="w-fit rounded-full bg-ink px-6 py-4 text-sm font-medium text-canvas transition-colors hover:bg-accent disabled:opacity-50"
+        className="inline-flex min-h-12 w-fit items-center rounded-full bg-accent px-8 text-base font-medium text-ink transition-colors hover:bg-accent-hover disabled:opacity-60"
       >
-        {status === "submitting" ? "Sending…" : "Send inquiry"}
+        {status === "submitting" ? "Gönderiliyor…" : "Gönder"}
       </button>
     </form>
   );

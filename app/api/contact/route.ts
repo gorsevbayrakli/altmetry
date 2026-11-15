@@ -4,8 +4,9 @@ interface ContactPayload {
   name: string;
   email: string;
   company?: string;
-  projectType: string;
-  budget: string;
+  companySize?: string;
+  priority: string;
+  budget?: string;
   message: string;
 }
 
@@ -17,10 +18,8 @@ function isValidPayload(body: unknown): body is ContactPayload {
     b.name.trim().length > 0 &&
     typeof b.email === "string" &&
     /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(b.email) &&
-    typeof b.projectType === "string" &&
-    b.projectType.trim().length > 0 &&
-    typeof b.budget === "string" &&
-    b.budget.trim().length > 0 &&
+    typeof b.priority === "string" &&
+    b.priority.trim().length > 0 &&
     typeof b.message === "string" &&
     b.message.trim().length > 0
   );
@@ -31,12 +30,12 @@ export async function POST(request: Request) {
   try {
     body = await request.json();
   } catch {
-    return NextResponse.json({ error: "Invalid request body." }, { status: 400 });
+    return NextResponse.json({ error: "Geçersiz istek." }, { status: 400 });
   }
 
   if (!isValidPayload(body)) {
     return NextResponse.json(
-      { error: "Please fill in all required fields with a valid email." },
+      { error: "Lütfen zorunlu alanları doldurun ve geçerli bir e-posta girin." },
       { status: 422 }
     );
   }
@@ -46,8 +45,9 @@ export async function POST(request: Request) {
     name: body.name,
     email: body.email,
     company: body.company ?? null,
-    projectType: body.projectType,
-    budget: body.budget,
+    companySize: body.companySize ?? null,
+    priority: body.priority,
+    budget: body.budget ?? null,
   });
 
   return NextResponse.json({ success: true });

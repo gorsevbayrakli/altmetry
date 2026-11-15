@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, type ReactNode } from "react";
 import Lenis from "@studio-freight/lenis";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 declare global {
   interface Window {
@@ -20,22 +22,22 @@ export default function SmoothScrollProvider({ children }: { children: ReactNode
     if (prefersReducedMotion) return;
 
     const lenis = new Lenis({
-      duration: 1.1,
-      easing: (t: number) => 1 - Math.pow(1 - t, 3),
+      duration: 1.15,
+      easing: (t: number) => 1 - Math.pow(1 - t, 4),
       smoothWheel: true,
     });
     lenisRef.current = lenis;
     window.__lenis = lenis;
 
-    let frame: number;
-    function raf(time: number) {
-      lenis.raf(time);
-      frame = requestAnimationFrame(raf);
-    }
-    frame = requestAnimationFrame(raf);
+    // Lenis ile GSAP ScrollTrigger aynı saatle çalışsın (Infaiwor sitesindeki kurulum).
+    gsap.registerPlugin(ScrollTrigger);
+    lenis.on("scroll", ScrollTrigger.update);
+    const tick = (t: number) => lenis.raf(t * 1000);
+    gsap.ticker.add(tick);
+    gsap.ticker.lagSmoothing(0);
 
     return () => {
-      cancelAnimationFrame(frame);
+      gsap.ticker.remove(tick);
       lenis.destroy();
       if (window.__lenis === lenis) delete window.__lenis;
     };

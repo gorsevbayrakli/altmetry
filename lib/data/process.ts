@@ -2,45 +2,51 @@ export interface ProcessStep {
   letter: string;
   number: string;
   title: string;
+  subtitle: string;
   description: string;
 }
 
-export const processFrameworkName = "The SCALE Framework";
+export const processFrameworkName = "SCALE yöntemi";
 
 export const processSteps: ProcessStep[] = [
   {
     letter: "S",
     number: "01",
-    title: "Signal",
+    title: "Dinle",
+    subtitle: "Signal",
     description:
-      "We start by finding the real constraint — through stakeholder interviews, data review, and a hard look at what's actually stopping growth, not just what it looks like from the outside.",
+      "Ekiple birebir görüşüyoruz. Süreçleri, verileri ve kullanılan araçları inceliyor, zamanın gerçekte nereye gittiğini buluyoruz.",
   },
   {
     letter: "C",
     number: "02",
-    title: "Calibrate",
+    title: "Önceliklendir",
+    subtitle: "Calibrate",
     description:
-      "Strategy sets the brief: positioning, target outcomes, and the metrics we'll be judged against. Nothing gets designed until this is agreed.",
+      "Etkisi en yüksek 2–3 fırsatı seçiyor, her biri için başarı ölçüsünü baştan belirliyoruz.",
   },
   {
     letter: "A",
     number: "03",
-    title: "Assemble",
+    title: "Kur",
+    subtitle: "Assemble",
     description:
-      "Design builds the system — identity, product, and UX — directly against the calibrated brief, reviewed in working sessions rather than big-reveal presentations.",
+      "Tek bir süreçte çalışan bir pilot kuruyoruz. Mevcut araçlarınızla, ekibinizin içinde.",
   },
   {
     letter: "L",
     number: "04",
-    title: "Launch",
+    title: "Devreye al",
+    subtitle: "Launch",
     description:
-      "Development ships in parallel with design, not after it, so what launches matches what was designed — down to the interaction detail.",
+      "Pilotu gerçek işte çalıştırıyor, nerede aksadığını izliyor, düzeltiyoruz. Ekibi eğitiyor, kuralları yazıyoruz.",
   },
   {
     letter: "E",
     number: "05",
-    title: "Expand",
+    title: "Büyüt",
+    subtitle: "Expand",
     description:
-      "We stay on past launch to watch the metrics we set in Calibrate, and keep iterating — copy, flow, features — until the numbers move and hold.",
+      "Sayıları baştaki ölçüyle karşılaştırıyoruz. İşe yarayanı diğer ekiplere ve süreçlere taşıyoruz.",
   },
 ];

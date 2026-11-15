@@ -1,32 +1,26 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { Project } from "@/lib/data/projects";
+import type { Scenario } from "@/lib/data/projects";
 
-export default function ProjectCard({ project }: { project: Project }) {
+/** Örnek senaryo kartı (koyu zemin). */
+export default function ProjectCard({ scenario }: { scenario: Scenario }) {
   return (
-    <Link href={`/work/${project.slug}`} className="group block">
-      <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-ink/5">
+    <Link href={`/work/${scenario.slug}`} className="group block">
+      <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-dark-raise">
         <Image
-          src={project.coverImage}
-          alt={`${project.client} — ${project.title}`}
+          src={scenario.coverImage}
+          alt=""
           fill
           sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-          className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-          placeholder="blur"
-          blurDataURL="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjMiPjxyZWN0IHdpZHRoPSI0IiBoZWlnaHQ9IjMiIGZpbGw9IiNlOGU1ZGQiLz48L3N2Zz4="
+          className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
         />
+        <span className="absolute left-4 top-4 rounded-full bg-dark-deep px-3 py-1 text-sm text-dark-ink">Örnek senaryo</span>
       </div>
-      <div className="mt-4 flex items-start justify-between gap-4">
-        <div>
-          <p className="font-display text-lg font-medium tracking-tight text-ink group-hover:text-accent transition-colors">
-            {project.client}
-          </p>
-          <p className="mt-2 text-sm text-ink/60">{project.summary}</p>
-        </div>
-        <span className="shrink-0 font-display text-sm tabular-nums text-ink/40">
-          {project.year}
-        </span>
+      <div className="mt-4 flex items-baseline justify-between gap-4">
+        <h3 className="text-xl font-semibold text-dark-ink group-hover:underline group-hover:decoration-1 group-hover:underline-offset-4">{scenario.name}</h3>
+        <p className="shrink-0 text-sm text-dark-ink-2">{scenario.sector}</p>
       </div>
+      <p className="mt-2 text-base leading-relaxed text-dark-ink-2">{scenario.summary}</p>
     </Link>
   );
 }

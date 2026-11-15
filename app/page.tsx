@@ -1,31 +1,31 @@
-import Hero from "@/components/sections/Hero";
-import ClientMarquee from "@/components/sections/ClientMarquee";
-import Services from "@/components/sections/Services";
-import Work from "@/components/sections/Work";
-import Impact from "@/components/sections/Impact";
-import Process from "@/components/sections/Process";
-import Studio from "@/components/sections/Studio";
-import Testimonials from "@/components/sections/Testimonials";
-import Faq from "@/components/sections/Faq";
-import JournalTeaser from "@/components/sections/JournalTeaser";
-import FinalCta from "@/components/sections/FinalCta";
-import SectionIndexRail from "@/components/layout/SectionIndexRail";
+import Hero from "@/components/home/Hero";
+import Tasks from "@/components/home/Tasks";
+import Services from "@/components/home/Services";
+import HowWeWork from "@/components/home/HowWeWork";
+import Statement from "@/components/home/Statement";
+import Scenarios from "@/components/home/Scenarios";
+import Studio from "@/components/home/Studio";
+import Faq from "@/components/home/Faq";
+import Notes from "@/components/home/Notes";
+import Closing from "@/components/home/Closing";
 
+/**
+ * Ana sayfa: koyu antrasit zemin (referans dsquaredmedia.net), hareketler Infaiwor sitesindeki dille (GSAP).
+ * Önerme: 20–250 kişilik firmaların tekrar eden işlerini yapay zekâya devrediyoruz; ölçerek, kararı insanda bırakarak.
+ */
 export default function Home() {
   return (
-    <>
-      <SectionIndexRail />
+    <div className="bg-dark-deep text-dark-ink">
       <Hero />
-      <ClientMarquee />
+      <Tasks />
       <Services />
-      <Work />
-      <Impact />
-      <Process />
+      <HowWeWork />
+      <Statement />
+      <Scenarios />
       <Studio />
-      <Testimonials />
       <Faq />
-      <JournalTeaser />
-      <FinalCta />
-    </>
+      <Notes />
+      <Closing />
+    </div>
   );
 }

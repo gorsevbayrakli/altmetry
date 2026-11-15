@@ -18,13 +18,3 @@ export function scrollToId(id: string, offset = 0) {
     el.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 }
-
-const disciplineTones = {
-  Design: "accent",
-  Development: "accent-2",
-  Consulting: "accent-3",
-} as const;
-
-export function disciplineTone(discipline: keyof typeof disciplineTones) {
-  return disciplineTones[discipline];
-}

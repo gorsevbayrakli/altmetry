@@ -1,42 +1,85 @@
 @import "tailwindcss";
 
+/*
+ * Altmetry marka renkleri (Figma: Altmetry › Marka kılavuzu › Renk).
+ * Beyaz ağırlıklı: beyaz ~%60, antrasit ~%22, açık gri ~%10, şeftali ~%5, turuncu ~%3.
+ * Turuncu (#FD7B41) yalnızca ana eylem ve ölçü yayı içindir; turuncu metin gerekiyorsa
+ * accent-text (#B8501D, beyazda 5:1) kullanılır. Turuncu üstüne beyaz yazı yazılmaz.
+ */
 :root {
   --color-canvas: #ffffff;
-  --color-ink: #0e0e0c;
-  --color-dark: #070707;
-  --color-dark-ink: #f5f3ee;
-  --color-accent: #f98048;
-  --color-accent-2: #3d5afe;
-  --color-accent-3: #ffc145;
-  --border-ink: rgb(14 14 12 / 0.12);
-  --border-paper: rgb(245 243 238 / 0.12);
+  --color-subtle: #f4f3f2;
+  --color-line: #dddcdb;
+  --color-ink: #1e2023;
+  --color-ink-2: #45484c;
+  --color-dark: #3c4044;
+  --color-dark-deep: #1e2023;
+  --color-dark-ink: #ecebea;
+  --color-dark-ink-2: #c4c2c0;
+  --color-dark-line: #5a5e62;
+  --color-dark-raise: #2b2e32;
+  --color-dark-mute: #8a8d91;
+  --color-accent: #fd7b41;
+  --color-accent-hover: #f06a2e;
+  --color-accent-text: #b8501d;
+  --color-peach: #edbf9b;
+  --color-error-dark: #f2a79f;
+  /* Geçiş için eski adlar: iç sayfalar yenilenene kadar marka renklerine yönlendirilir. */
+  --color-accent-2: #3c4044;
+  --color-accent-3: #b8501d;
 }
 
 @theme inline {
   --color-canvas: var(--color-canvas);
+  --color-subtle: var(--color-subtle);
+  --color-line: var(--color-line);
   --color-ink: var(--color-ink);
+  --color-ink-2: var(--color-ink-2);
   --color-dark: var(--color-dark);
+  --color-dark-deep: var(--color-dark-deep);
   --color-dark-ink: var(--color-dark-ink);
+  --color-dark-ink-2: var(--color-dark-ink-2);
+  --color-dark-line: var(--color-dark-line);
+  --color-dark-raise: var(--color-dark-raise);
+  --color-dark-mute: var(--color-dark-mute);
   --color-accent: var(--color-accent);
+  --color-accent-hover: var(--color-accent-hover);
+  --color-accent-text: var(--color-accent-text);
+  --color-peach: var(--color-peach);
+  --color-error-dark: var(--color-error-dark);
   --color-accent-2: var(--color-accent-2);
   --color-accent-3: var(--color-accent-3);
-  --font-display: var(--font-bricolage);
-  --font-body: var(--font-inter);
+  --font-display: var(--font-mona);
+  --font-body: var(--font-mona);
 }
 
 body {
-  background: var(--color-canvas);
-  color: var(--color-ink);
+  background: var(--color-dark-deep);
+  color: var(--color-dark-ink);
   font-family: var(--font-body), system-ui, sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
 }
 
 .font-display {
-  font-family: var(--font-display), var(--font-body), system-ui, sans-serif;
+  font-family: var(--font-display), system-ui, sans-serif;
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+p,
+li,
+dd {
+  text-wrap: pretty;
 }
 
 ::selection {
-  background: var(--color-accent);
-  color: var(--color-canvas);
+  background: var(--color-peach);
+  color: var(--color-ink);
 }
 
 .tabular-nums {
@@ -63,22 +106,20 @@ html.lenis body {
   }
 }
 
+/* Odak çerçevesi: açık zeminde koyu, koyu zeminde açık (turuncu beyazda 2.6:1 kalıyor). */
 :focus-visible {
-  outline: 2px solid var(--color-accent);
-  outline-offset: 3px;
+  outline: 2px solid var(--color-dark-ink);
+  outline-offset: 4px;
 }
 
-@keyframes marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
+/* Açık zeminli öğelerin (beyaz kartlar) içinde odak çerçevesi koyu. */
+.bg-canvas :focus-visible {
+  outline-color: var(--color-ink);
 }
 
-.animate-marquee {
-  animation: marquee 32s linear infinite;
+.bg-dark :focus-visible,
+.bg-dark-deep :focus-visible {
+  outline-color: var(--color-dark-ink);
 }
 
 .no-scrollbar {
@@ -90,52 +131,87 @@ html.lenis body {
   display: none;
 }
 
-@keyframes blob-float-a {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(4%, 6%) scale(1.08); }
-  66% { transform: translate(-3%, -4%) scale(0.95); }
+/* Ölçü ızgarası: koyu zeminde 24px aralıklı soluk noktalar (dekoratif). */
+.dot-grid {
+  background-image: radial-gradient(rgb(236 235 234 / 0.1) 1px, transparent 1px);
+  background-size: 24px 24px;
 }
 
-@keyframes blob-float-b {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  40% { transform: translate(-5%, 3%) scale(1.1); }
-  70% { transform: translate(4%, -5%) scale(0.92); }
+.bg-dark-raise :focus-visible {
+  outline-color: var(--color-dark-ink);
 }
 
-.animate-blob-a {
-  animation: blob-float-a 18s ease-in-out infinite;
+/* Hareket: <html class="motion"> yalnızca hareket azaltma kapalıyken eklenir (layout'taki küçük betik).
+   Animasyonla gelecek öğeler ilk boyamada gizli başlar; GSAP onları görünür yapar. */
+.motion [data-hero] .ln,
+.motion [data-hero] [data-hero-rest] > *,
+.motion [data-fly],
+.motion [data-lines] .ln,
+.motion [data-up],
+.motion [data-stagger] > * {
+  opacity: 0;
 }
 
-.animate-blob-b {
-  animation: blob-float-b 22s ease-in-out infinite;
+/* Ölçü yayı çizimi için yol uzunluğu 1'e normalize edilir. */
+[data-arc] path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
 }
 
-.glass {
-  background: rgb(255 255 255 / 0.55);
-  backdrop-filter: blur(20px) saturate(160%);
-  -webkit-backdrop-filter: blur(20px) saturate(160%);
-  border: 1px solid rgb(255 255 255 / 0.6);
-  box-shadow: 0 8px 32px rgb(14 14 12 / 0.06);
+/* Kaydırmayla yanan kelimeler: sönük ton koyu zeminde de 4.5:1'in üstünde. */
+[data-words] .word {
+  color: var(--color-dark-mute);
+  transition: color 0.4s linear;
+}
+[data-words] .word.on {
+  color: var(--color-dark-ink);
 }
 
-.glass-dark {
-  background: rgb(255 255 255 / 0.06);
-  backdrop-filter: blur(20px) saturate(160%);
-  -webkit-backdrop-filter: blur(20px) saturate(160%);
-  border: 1px solid rgb(255 255 255 / 0.12);
-  box-shadow: 0 8px 32px rgb(0 0 0 / 0.3);
+/* Onay bekleyen satırın nabzı (Infaiwor'daki "ping"). */
+/* Ad "ping" değil: Tailwind'in kendi ping animasyonu (büyüt + soldur) aynı adı kullanıyor ve çakışıyordu. */
+@keyframes approval-pulse {
+  0% { box-shadow: 0 0 0 0 rgb(253 123 65 / 0.55); }
+  70%, 100% { box-shadow: 0 0 0 8px rgb(253 123 65 / 0); }
+}
+.approval-pulse {
+  animation: approval-pulse 2.4s cubic-bezier(0.16, 1, 0.3, 1) infinite;
 }
 
-.gradient-mesh {
-  background-image:
-    radial-gradient(ellipse 55% 45% at 15% 15%, rgb(249 128 72 / 0.12), transparent 60%),
-    radial-gradient(ellipse 45% 40% at 85% 25%, rgb(61 90 254 / 0.09), transparent 60%),
-    radial-gradient(ellipse 50% 45% at 50% 100%, rgb(255 193 69 / 0.12), transparent 60%);
+/* Üst üste binen kartlar (Infaiwor'daki stack). Her kart bir öncekinden 24px aşağıda yapışır;
+   gerideki kart HomeMotion ile küçülür ve --veil ile kararır. */
+.stack-card {
+  position: sticky;
+  top: calc(96px + var(--i, 0) * 24px);
+  min-height: min(560px, calc(100svh - 160px));
+  transform-origin: 50% 0;
+  will-change: transform;
+  box-shadow: 0 -24px 48px -24px rgb(0 0 0 / 0.7);
 }
-
-@media (prefers-reduced-motion: reduce) {
-  .animate-blob-a,
-  .animate-blob-b {
-    animation: none;
+.stack-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: var(--color-dark-deep);
+  opacity: var(--veil, 0);
+  pointer-events: none;
+  border-radius: inherit;
+}
+@media (max-width: 900px) {
+  .stack-card {
+    position: relative;
+    top: 0;
+    min-height: 0;
   }
+}
+
+/* Üst menü aşağı kaydırınca gizlenir, yukarı kaydırınca döner. */
+.nav-hide {
+  transform: translateY(-100%);
+}
+
+/* Koyu zeminde açılır liste seçenekleri okunur kalsın. */
+select option {
+  background: var(--color-dark-deep);
+  color: var(--color-dark-ink);
 }

@@ -32,7 +32,7 @@ export function Logo({ className, title = "Altmetry" }: { className?: string; ti
 export function MeasureArc({ className }: { className?: string }) {
   return (
     <svg data-arc viewBox="0 0 100 12" preserveAspectRatio="none" aria-hidden className={cn("block h-3 w-full", className)}>
-      <path pathLength={1} d="M3 3 C 30 11, 70 11, 97 3" stroke="#FD7B41" strokeWidth="4" strokeLinecap="round" fill="none" />
+      <path d="M3 3 C 30 11, 70 11, 97 3" stroke="#FD7B41" strokeWidth="4" strokeLinecap="round" fill="none" />
     </svg>
   );
 }

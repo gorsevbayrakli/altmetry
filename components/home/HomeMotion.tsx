@@ -42,7 +42,7 @@ export default function HomeMotion() {
       if (hero) {
         const tl = gsap.timeline({ delay: 0.15 });
         tl.fromTo($$(".ln", hero), { opacity: 0, y: 48, filter: "blur(8px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 1.3, ease: EASE, stagger: 0.12 }, 0);
-        tl.fromTo($$("[data-arc] path", hero), { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 1.1, ease: "power2.out" }, 0.7);
+        tl.fromTo($$("[data-arc]", hero), { clipPath: "inset(0% 100% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 1.1, ease: "power2.out" }, 0.7);
         tl.fromTo($$("[data-hero-rest] > *", hero), { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 1, ease: EASE, stagger: 0.08 }, 0.5);
         $$("[data-fly]", hero).forEach((c, i) => {
           const dir = i === 0 ? -1 : i === 2 ? 1 : 0;
@@ -84,9 +84,9 @@ export default function HomeMotion() {
       });
 
       // Ölçü yayları (giriş dışı)
-      $$("[data-arc] path").forEach((p) => {
+      $$("[data-arc]").forEach((p) => {
         if (p.closest("[data-hero]")) return;
-        gsap.fromTo(p, { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 1.2, ease: "power2.out", scrollTrigger: { trigger: p, start: "top 85%" } });
+        gsap.fromTo(p, { clipPath: "inset(0% 100% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 1.2, ease: "power2.out", scrollTrigger: { trigger: p, start: "top 85%" } });
       });
 
       // Üst üste binen kartlar: bir sonraki kart gelirken alttaki hafifçe küçülür ve kararır

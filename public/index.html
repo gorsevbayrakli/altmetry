@@ -7,7 +7,7 @@
 <meta name="description" content="Altmetry hands the work your team does by hand over to AI. For companies of 20 to 250 people: a one-week diagnosis, a 4–6 week pilot, and the final call stays with a person.">
 <meta property="og:title" content="Altmetry · Applied AI for growing companies">
 <meta property="og:description" content="We hand the work your team does by hand over to AI. One-week diagnosis, 4–6 week pilot.">
-<meta name="theme-color" content="#131313">
+<meta name="theme-color" content="#FFF0E0">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,7 +24,7 @@
   --ease:cubic-bezier(.16,1,.3,1);
   color-scheme:dark;
 }
-:root[data-pal="warm"]{
+:root{
   --bg:#FFF0E0; --fg:#24141F; --mute:#6B5260; --line:#EBD5BF; --raise:#FFE4CB;
   --acc:#FF5B22; --acc-ink:#24141F;
   --c1:#FFC93C; --i1:#24141F; --c2:#FF8FB0; --i2:#24141F; --c3:#24141F; --i3:#FFF0E0; --c4:#7ED7B5; --i4:#24141F;
@@ -72,18 +72,12 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .overlay a{font-weight:700;font-size:clamp(2.5rem,8vw,5.5rem);line-height:1.05;letter-spacing:-0.035em;text-decoration:none;display:inline-block;transition:transform .4s var(--ease)}
 .overlay a:hover{transform:translateX(16px)}
 
-/* palette switch (demo control) */
-.pal{position:fixed;right:var(--gr);bottom:calc(24px + env(safe-area-inset-bottom,0px));z-index:70;display:flex;gap:var(--s1);padding:var(--s1);border-radius:999px;background:var(--raise);border:1px solid var(--line);box-shadow:0 8px 24px rgba(0,0,0,.18)}
-.pal button{font:600 15px/1 var(--f);min-height:44px;padding:0 var(--s4);border-radius:999px;border:0;background:transparent;color:var(--mute);cursor:pointer}
-.pal button[aria-pressed="true"]{background:var(--fg);color:var(--bg)}
-.pal .lbl{align-self:center;padding:0 var(--s2) 0 var(--s3);color:var(--mute);font-size:15px}
-@media (max-width:560px){.pal .lbl{display:none}}
 
 /* hero */
 .hero{min-height:100svh;display:grid;place-items:center;text-align:center;position:relative;padding-block:var(--s10) var(--s9);overflow:hidden}
 .hero h1{margin:0 auto;font-weight:600;font-size:clamp(2.5rem,6.2vw,5.5rem);line-height:1.02;letter-spacing:-0.035em;max-width:15ch;text-wrap:balance;position:relative;z-index:2}
 .hero h1 em{font-style:normal;color:var(--acc)}
-:root[data-pal="warm"] .hero h1 em{color:var(--acc)}
+:root .hero h1 em{color:var(--acc)}
 .hero p{margin:var(--s5) auto 0;max-width:46ch;color:var(--mute);font-size:18px;position:relative;z-index:2}
 .btns{display:flex;flex-wrap:wrap;justify-content:center;gap:var(--s3);margin-top:var(--s6);position:relative;z-index:2}
 .btn{display:inline-flex;align-items:center;gap:var(--s2);min-height:48px;padding:0 var(--s5);border-radius:999px;font-weight:600;text-decoration:none;border:1.5px solid var(--fg);transition:transform .3s var(--ease),background .3s,color .3s}
@@ -321,8 +315,6 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
   <li><a href="#services">Services</a></li><li><a href="#process">AI transition</a></li><li><a href="#work">Work</a></li><li><a href="#notes">Writing</a></li><li><a href="#workshop">Game workshop</a></li><li><a href="#contact">Contact</a></li>
 </ul></div></nav>
 
-<div class="pal" role="group" aria-label="Palet (demo)"><span class="lbl">Palet</span><button type="button" id="p-night" data-p="night" aria-pressed="true">Gece</button><button type="button" id="p-warm" data-p="warm" aria-pressed="false">Sıcak</button></div>
-
 <main id="top">
   <section class="hero">
     <div class="floaters" id="fl" aria-hidden="true">
@@ -446,11 +438,6 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
   var RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
   var root=document.documentElement;
 
-  /* palette */
-  var pal=document.querySelector('.pal');
-  function setPal(p){if(p==='warm')root.setAttribute('data-pal','warm');else root.removeAttribute('data-pal');pal.querySelectorAll('button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.p===p)});try{localStorage.setItem('gp-pal',p)}catch(e){}}
-  pal.addEventListener('click',function(e){var b=e.target.closest('button');if(b)setPal(b.dataset.p)});
-  try{var sp=localStorage.getItem('gp-pal');if(sp)setPal(sp)}catch(e){}
 
   /* loader */
   var ld=document.getElementById('ld');

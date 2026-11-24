@@ -23,8 +23,8 @@ export default function ContactPage() {
               olduğunu açıkça söylüyoruz. Satış konuşması yapmıyoruz.
             </p>
             <div className="mt-10 flex flex-col gap-2 border-t border-dark-line pt-8">
-              <a href="mailto:hello@altmetry.com" className="inline-flex min-h-12 w-fit items-center font-display text-2xl font-light text-dark-ink underline decoration-1 underline-offset-[6px]">
-                hello@altmetry.com
+              <a href="mailto:info@altmetry.com" className="inline-flex min-h-12 w-fit items-center font-display text-2xl font-light text-dark-ink underline decoration-1 underline-offset-[6px]">
+                info@altmetry.com
               </a>
               <p className="text-base text-dark-ink-2">İstanbul · Türkiye ve yurt dışında uzaktan</p>
             </div>

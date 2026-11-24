@@ -43,8 +43,8 @@ export default function Footer() {
             </a>
           ))}
         </nav>
-        <a href="mailto:hello@altmetry.com" className="mt-8 inline-flex min-h-11 items-center text-base text-dark-ink underline decoration-1 underline-offset-4">
-          hello@altmetry.com
+        <a href="mailto:info@altmetry.com" className="mt-8 inline-flex min-h-11 items-center text-base text-dark-ink underline decoration-1 underline-offset-4">
+          info@altmetry.com
         </a>
         <p className="mt-2 text-sm text-dark-ink-2">Altmetry · İstanbul · Türkiye ve yurt dışında uzaktan</p>
         <p className="mt-2 text-sm text-dark-ink-2">© {new Date().getFullYear()} Altmetry. Tüm hakları saklıdır.</p>
